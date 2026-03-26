@@ -36,6 +36,6 @@ public class InternshipAssignment extends BaseEntity {
     private LocalDateTime assignedDate;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false, columnDefinition = "varchar(20) default 'PENDING'")
+    @Column(nullable = false, length = 20)
     private AssignmentStatus status = AssignmentStatus.PENDING;
 }
