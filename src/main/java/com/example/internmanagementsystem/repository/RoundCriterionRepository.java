@@ -15,4 +15,7 @@ public interface RoundCriterionRepository extends JpaRepository<RoundCriterion, 
     @Modifying
     @Query("DELETE FROM RoundCriterion r WHERE r.round.roundId = :roundId")
     void deleteCriteriaByRoundId(@Param("roundId") Integer roundId);
+
+    @Query("SELECT COUNT(r) > 0 FROM RoundCriterion r WHERE r.round.roundId = :roundId AND r.criterion.criterionId = :criterionId")
+    boolean checkIfExists(@Param("roundId") Integer roundId, @Param("criterionId") Integer criterionId);
 }
