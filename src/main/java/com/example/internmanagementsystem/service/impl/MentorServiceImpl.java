@@ -36,9 +36,22 @@ public class MentorServiceImpl implements MentorService {
 
     @Override
     public List<MentorResponse> getAllMentors() {
-        return mentorRepository.findAll().stream()
-                .map(mentorMapper::toResponse)
-                .collect(Collectors.toList());
+        User user = getCurrentUser();
+        if (user.getRole().equals(Role.ADMIN)) {
+            return mentorRepository.findAllByUserRole(Role.MENTOR).stream()
+                    .map(mentorMapper::toResponse)
+                    .collect(Collectors.toList());
+        }
+        if (user.getRole().equals(Role.STUDENT)) {
+            return mentorRepository.findAllByUserRole(Role.MENTOR).stream()
+                    .map(mentor -> MentorResponse.builder()
+                            .fullName(mentor.getUser().getFullName())
+                            .department(mentor.getDepartment())
+                            .build()
+                    )
+                    .collect(Collectors.toList());
+        }
+        return null;
     }
 
     @Override
@@ -48,9 +61,9 @@ public class MentorServiceImpl implements MentorService {
             throw new RuntimeException("Lỗi bảo mật: Bạn chỉ được phép xem thông tin của chính mình!");
         }
 
-        Mentor mentor = mentorRepository.findById(id)
+        Mentor mentor = mentorRepository.findByUserRoleAndMentorId(Role.MENTOR, id)
                 .orElseThrow(() -> new RuntimeException("Không tìm thấy thông tin giảng viên hướng dẫn!"));
-        return mentorMapper.toResponse(mentor);
+        return mentorMapper.toResponse(mentor) ;
     }
 
     @Override

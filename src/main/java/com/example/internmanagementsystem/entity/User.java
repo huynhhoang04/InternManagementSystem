@@ -38,4 +38,10 @@ public class User extends BaseEntity {
 
     @Column(columnDefinition = "boolean default true")
     private Boolean isActive = true;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL,  fetch = FetchType.LAZY, orphanRemoval = true)
+    private Mentor mentor;
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL,  fetch = FetchType.LAZY, orphanRemoval = true)
+    private Student student;
 }

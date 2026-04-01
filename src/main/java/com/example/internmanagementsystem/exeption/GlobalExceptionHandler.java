@@ -1,9 +1,12 @@
 package com.example.internmanagementsystem.exeption;
 
-import com.example.internmanagementsystem.dto.response.ErrorResponse;
+import com.example.internmanagementsystem.dto.response.ApiResponse;
+import com.example.internmanagementsystem.dto.response.ValidationError;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -12,72 +15,97 @@ import org.springframework.security.access.AccessDeniedException;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 @RestControllerAdvice
 @Slf4j
 public class GlobalExceptionHandler {
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<ErrorResponse> handleValidationExceptions(MethodArgumentNotValidException ex) {
-        Map<String, String> errors = new HashMap<>();
-        ex.getBindingResult().getAllErrors().forEach((error) -> {
-            String fieldName = ((FieldError) error).getField();
-            String errorMessage = error.getDefaultMessage();
-            errors.put(fieldName, errorMessage);
-        });
+    public ResponseEntity<ApiResponse<Object>> handleValidationExceptions(MethodArgumentNotValidException ex) {
+        List<ValidationError> validationErrors = ex.getBindingResult()
+                .getAllErrors()
+                .stream()
+                .map(error -> new ValidationError(
+                        ((FieldError) error).getField(),
+                        error.getDefaultMessage()
+                ))
+                .collect(Collectors.toList());
 
-        log.error("Validation Error: {}", errors);
+        log.error("Lỗi đầu vào: {}", validationErrors);
 
-        ErrorResponse errorResponse = ErrorResponse.builder()
-                .timestamp(LocalDateTime.now())
-                .status(HttpStatus.BAD_REQUEST.value())
-                .error("Bad Request")
-                .message("Dữ liệu đầu vào không hợp lệ")
-                .details(errors)
-                .build();
+        ApiResponse<Object> apiResponse = ApiResponse.error(
+                HttpStatus.BAD_REQUEST.value(),
+                "Dũ liệu đâu vào không hợp lệ",
+                validationErrors
+        );
 
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiResponse);
     }
 
     @ExceptionHandler(RuntimeException.class)
-    public ResponseEntity<ErrorResponse> handleRuntimeExceptions(RuntimeException ex) {
-        log.error("Runtime Exception: {}", ex.getMessage());
+    public ResponseEntity<ApiResponse<Object>> handleRuntimeExceptions(RuntimeException ex) {
+        log.error("Lỗi nghiệp vụ: {}", ex.getMessage());
 
-        ErrorResponse errorResponse = ErrorResponse.builder()
-                .timestamp(LocalDateTime.now())
-                .status(HttpStatus.BAD_REQUEST.value())
-                .error("Bad Request")
-                .message(ex.getMessage())
-                .build();
+        ApiResponse<Object> apiResponse = ApiResponse.error(
+                HttpStatus.BAD_REQUEST.value(),
+                "Lỗi thực thi",
+                ex.getMessage()
+        );
 
-        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(errorResponse);
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiResponse);
     }
 
     @ExceptionHandler(Exception.class)
-    public ResponseEntity<ErrorResponse> handleGlobalExceptions(Exception ex) {
-        log.error("System Error: ", ex);
+    public ResponseEntity<ApiResponse<Object>> handleGlobalExceptions(Exception ex) {
+        log.error("Lỗi hệ thống: ", ex);
 
-        ErrorResponse errorResponse = ErrorResponse.builder()
-                .timestamp(LocalDateTime.now())
-                .status(HttpStatus.INTERNAL_SERVER_ERROR.value())
-                .error("Internal Server Error")
-                .message("Đã xảy ra lỗi hệ thống, vui lòng thử lại sau!")
-                .build();
+        ApiResponse<Object> apiResponse = ApiResponse.error(
+                HttpStatus.INTERNAL_SERVER_ERROR.value(),
+                "Lỗi hệ thống",
+                ex.getMessage()
+        );
 
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(errorResponse);
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(apiResponse);
     }
 
     @ExceptionHandler(AccessDeniedException.class)
-    public ResponseEntity<ErrorResponse> handleAccessDeniedException(AccessDeniedException ex) {
-        log.error("Access Denied: {}", ex.getMessage());
+    public ResponseEntity<ApiResponse<Object>> handleAccessDeniedException(AccessDeniedException ex) {
+        log.error("Từ chối truy cập: {}", ex.getMessage());
 
-        ErrorResponse errorResponse = ErrorResponse.builder()
-                .timestamp(LocalDateTime.now())
-                .status(HttpStatus.FORBIDDEN.value())
-                .error("Forbidden")
-                .message("Quyền truy cập bị từ chối!")
-                .build();
+        ApiResponse<Object> apiResponse = ApiResponse.error(
+                HttpStatus.FORBIDDEN.value(),
+                "Bạn không có quyền truy cập",
+                ex.getMessage()
+        );
 
-        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(errorResponse);
+        return ResponseEntity.status(HttpStatus.FORBIDDEN).body(apiResponse);
+    }
+
+    @ExceptionHandler(UsernameNotFoundException.class)
+    public ResponseEntity<ApiResponse<Object>> handleUsernameNotFoundException(UsernameNotFoundException ex) {
+        log.error("Không tìm thấy tên người dùng {}", ex.getMessage());
+
+        ApiResponse<Object> apiResponse = ApiResponse.error(
+                HttpStatus.NOT_FOUND.value(),
+                "Không tìm thấy tên người dùng",
+                ex.getMessage()
+        );
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(apiResponse);
+    }
+
+    @ExceptionHandler(BadCredentialsException.class)
+    public ResponseEntity<ApiResponse<Object>> handleBadCredentialsException(BadCredentialsException ex) {
+        log.error("Sai mật khẩu {}", ex.getMessage());
+
+        ApiResponse<Object> apiResponse = ApiResponse.error(
+                HttpStatus.UNAUTHORIZED.value(),
+                "Sai mật khẩu",
+                ex.getMessage()
+        );
+
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(apiResponse);
     }
 }

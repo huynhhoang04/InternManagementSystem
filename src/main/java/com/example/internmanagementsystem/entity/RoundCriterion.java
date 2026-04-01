@@ -2,6 +2,9 @@ package com.example.internmanagementsystem.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import java.math.BigDecimal;
 
 @Entity
@@ -20,10 +23,12 @@ public class RoundCriterion extends BaseEntity {
     private Integer roundCriterionId;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "round_id", nullable = false)
     private AssessmentRound round;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "criterion_id", nullable = false)
     private EvaluationCriterion criterion;
 

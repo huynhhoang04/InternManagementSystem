@@ -2,6 +2,9 @@ package com.example.internmanagementsystem.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import java.time.LocalDate;
 
 @Entity
@@ -18,6 +21,7 @@ public class Student extends BaseEntity {
 
     @OneToOne
     @MapsId
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "student_id")
     private User user;
 

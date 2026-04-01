@@ -3,7 +3,11 @@ package com.example.internmanagementsystem.entity;
 import com.example.internmanagementsystem.enums.AssignmentStatus;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "internship_assignments", uniqueConstraints = {
@@ -21,14 +25,17 @@ public class InternshipAssignment extends BaseEntity {
     private Integer assignmentId;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "student_id", nullable = false)
     private Student student;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "mentor_id", nullable = false)
     private Mentor mentor;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "phase_id", nullable = false)
     private InternshipPhase phase;
 
@@ -38,4 +45,7 @@ public class InternshipAssignment extends BaseEntity {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false, length = 20)
     private AssignmentStatus status = AssignmentStatus.PENDING;
+
+    @OneToMany(mappedBy = "assignment", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<AssessmentResult> assessmentResults;
 }

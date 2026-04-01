@@ -2,6 +2,7 @@ package com.example.internmanagementsystem.controller;
 
 import com.example.internmanagementsystem.dto.request.StudentRequest;
 import com.example.internmanagementsystem.dto.request.StudentUpdateRequest;
+import com.example.internmanagementsystem.dto.response.ApiResponse;
 import com.example.internmanagementsystem.dto.response.StudentResponse;
 import com.example.internmanagementsystem.service.StudentService;
 import jakarta.validation.Valid;
@@ -22,27 +23,27 @@ public class StudentController {
 
     @PreAuthorize("hasAnyRole('ADMIN', 'MENTOR')")
     @GetMapping
-    public ResponseEntity<List<StudentResponse>> getAllStudents() {
-        return ResponseEntity.ok(studentService.getAllStudents());
+    public ResponseEntity<ApiResponse<List<StudentResponse>>> getAllStudents() {
+        return ResponseEntity.ok(ApiResponse.success(studentService.getAllStudents()));
     }
 
     @PreAuthorize("hasAnyRole('ADMIN', 'MENTOR', 'STUDENT')")
     @GetMapping("/{id}")
-    public ResponseEntity<StudentResponse> getStudentById(@PathVariable("id") Integer id) {
-        return ResponseEntity.ok(studentService.getStudentById(id));
+    public ResponseEntity<ApiResponse<StudentResponse>> getStudentById(@PathVariable("id") Integer id) {
+        return ResponseEntity.ok(ApiResponse.success(studentService.getStudentById(id)));
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
-    public ResponseEntity<StudentResponse> createStudent(@Valid @RequestBody StudentRequest request) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(studentService.createStudent(request));
+    public ResponseEntity<ApiResponse<StudentResponse>> createStudent(@Valid @RequestBody StudentRequest request) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.success(studentService.createStudent(request)));
     }
 
     @PreAuthorize("hasAnyRole('ADMIN', 'STUDENT')")
     @PutMapping("/{id}")
-    public ResponseEntity<StudentResponse> updateStudent(
+    public ResponseEntity<ApiResponse<StudentResponse>> updateStudent(
             @PathVariable("id") Integer id,
             @Valid @RequestBody StudentUpdateRequest request) {
-        return ResponseEntity.ok(studentService.updateStudent(id, request));
+        return ResponseEntity.ok(ApiResponse.success(studentService.updateStudent(id, request)));
     }
 }

@@ -2,6 +2,7 @@ package com.example.internmanagementsystem.controller;
 
 import com.example.internmanagementsystem.dto.request.MentorRequest;
 import com.example.internmanagementsystem.dto.request.MentorUpdateRequest;
+import com.example.internmanagementsystem.dto.response.ApiResponse;
 import com.example.internmanagementsystem.dto.response.MentorResponse;
 import com.example.internmanagementsystem.service.MentorService;
 import jakarta.validation.Valid;
@@ -23,27 +24,27 @@ public class MentorController {
 
     @PreAuthorize("hasAnyRole('ADMIN', 'STUDENT')")
     @GetMapping
-    public ResponseEntity<List<MentorResponse>> getAllMentors() {
-        return ResponseEntity.ok(mentorService.getAllMentors());
+    public ResponseEntity<ApiResponse<List<MentorResponse>>> getAllMentors() {
+        return ResponseEntity.ok(ApiResponse.success(mentorService.getAllMentors()));
     }
 
     @PreAuthorize("hasAnyRole('ADMIN', 'MENTOR', 'STUDENT')")
     @GetMapping("/{id}")
-    public ResponseEntity<MentorResponse> getMentorById(@PathVariable("id") Integer id) {
-        return ResponseEntity.ok(mentorService.getMentorById(id));
+    public ResponseEntity<ApiResponse<MentorResponse>> getMentorById(@PathVariable("id") Integer id) {
+        return ResponseEntity.ok(ApiResponse.success(mentorService.getMentorById(id)));
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
-    public ResponseEntity<MentorResponse> createMentor(@Valid @RequestBody MentorRequest request) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(mentorService.createMentor(request));
+    public ResponseEntity<ApiResponse<MentorResponse>> createMentor(@Valid @RequestBody MentorRequest request) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.success(mentorService.createMentor(request)));
     }
 
     @PreAuthorize("hasAnyRole('ADMIN', 'MENTOR')")
     @PutMapping("/{id}")
-    public ResponseEntity<MentorResponse> updateMentor(
+    public ResponseEntity<ApiResponse<MentorResponse>> updateMentor(
             @PathVariable("id") Integer id,
             @Valid @RequestBody MentorUpdateRequest request) {
-        return ResponseEntity.ok(mentorService.updateMentor(id, request));
+        return ResponseEntity.ok(ApiResponse.success(mentorService.updateMentor(id,request)));
     }
 }

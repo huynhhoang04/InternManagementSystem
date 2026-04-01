@@ -1,6 +1,7 @@
 package com.example.internmanagementsystem.controller;
 
 import com.example.internmanagementsystem.dto.request.EvaluationCriterionRequest;
+import com.example.internmanagementsystem.dto.response.ApiResponse;
 import com.example.internmanagementsystem.dto.response.EvaluationCriterionResponse;
 import com.example.internmanagementsystem.service.EvaluationCriterionService;
 import jakarta.validation.Valid;
@@ -22,34 +23,34 @@ public class EvaluationCriterionController {
 
     @PreAuthorize("hasAnyRole('ADMIN', 'MENTOR', 'STUDENT')")
     @GetMapping
-    public ResponseEntity<List<EvaluationCriterionResponse>> getAllCriteria() {
-        return ResponseEntity.ok(criterionService.getAllCriteria());
+    public ResponseEntity<ApiResponse<List<EvaluationCriterionResponse>>> getAllCriteria() {
+        return ResponseEntity.ok(ApiResponse.success(criterionService.getAllCriteria()));
     }
 
     @PreAuthorize("hasAnyRole('ADMIN', 'MENTOR', 'STUDENT')")
     @GetMapping("/{criterion_id}")
-    public ResponseEntity<EvaluationCriterionResponse> getCriterionById(@PathVariable("criterion_id") Integer criterionId) {
-        return ResponseEntity.ok(criterionService.getCriterionById(criterionId));
+    public ResponseEntity<ApiResponse<EvaluationCriterionResponse>> getCriterionById(@PathVariable("criterion_id") Integer criterionId) {
+        return ResponseEntity.ok(ApiResponse.success(criterionService.getCriterionById(criterionId)));
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
-    public ResponseEntity<EvaluationCriterionResponse> createCriterion(@Valid @RequestBody EvaluationCriterionRequest request) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(criterionService.createCriterion(request));
+    public ResponseEntity<ApiResponse<EvaluationCriterionResponse>> createCriterion(@Valid @RequestBody EvaluationCriterionRequest request) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.success(criterionService.createCriterion(request)));
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{criterion_id}")
-    public ResponseEntity<EvaluationCriterionResponse> updateCriterion(
+    public ResponseEntity<ApiResponse<EvaluationCriterionResponse>> updateCriterion(
             @PathVariable("criterion_id") Integer criterionId,
             @Valid @RequestBody EvaluationCriterionRequest request) {
-        return ResponseEntity.ok(criterionService.updateCriterion(criterionId, request));
+        return ResponseEntity.ok(ApiResponse.success(criterionService.updateCriterion(criterionId, request)));
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{criterion_id}")
-    public ResponseEntity<Void> deleteCriterion(@PathVariable("criterion_id") Integer criterionId) {
+    public ResponseEntity<ApiResponse<Void>> deleteCriterion(@PathVariable("criterion_id") Integer criterionId) {
         criterionService.deleteCriterion(criterionId);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok(ApiResponse.success(null));
     }
 }

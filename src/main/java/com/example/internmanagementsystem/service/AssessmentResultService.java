@@ -7,7 +7,7 @@ import com.example.internmanagementsystem.dto.response.AssessmentResultResponse;
 import java.util.List;
 
 public interface AssessmentResultService {
-    List<AssessmentResultResponse> getResults(Integer assignmentId);
+    List<AssessmentResultResponse> getResults(Integer assignmentId, Integer userId);
 
     AssessmentResultResponse createResult(AssessmentResultRequest request);
 

@@ -1,0 +1,1202 @@
+[
+  //Happy path
+  //api1
+  //request
+  {
+    "username": "admin",
+    "password": "12345"
+  },
+  //response
+  {
+    "success": true,
+    "message": "Thao tác thành công",
+    "data": {
+      "accessToken": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJhZG1pbiIsImlhdCI6MTc3NDc5MjY1NiwiZXhwIjoxNzc0ODc5MDU2fQ.NdB7lG0yQ4moti5Oljg7ZnytATEfNHDHPfcoaBtd5ZxY-yJwllPK8enNp6TmTFcG",
+      "role": "ADMIN",
+      "tokenType": "Bearer",
+      "username": "admin"
+    },
+    "errors": null,
+    "timestamp": "2026-03-29T20:57:36.782122"
+  },
+  //api2
+  //request
+  //response
+  {
+    "success": true,
+    "message": "Thao tác thành công",
+    "data": {
+      "academicRank": null,
+      "address": null,
+      "className": null,
+      "dateOfBirth": null,
+      "department": null,
+      "email": "admin@ptit.edu.vn",
+      "fullName": "Quản trị viên Hệ thống",
+      "major": null,
+      "phoneNumber": null,
+      "role": "ADMIN",
+      "studentCode": null,
+      "userId": 1,
+      "username": "admin"
+    },
+    "errors": null,
+    "timestamp": "2026-03-29T20:58:01.851815"
+  },
+  //api3
+  //request
+  //response
+  {
+    "success": true,
+    "message": "Thao tác thành công",
+    "data": [
+      {
+        "email": "admin@ptit.edu.vn",
+        "fullName": "Quản trị viên Hệ thống",
+        "isActive": true,
+        "phoneNumber": null,
+        "role": "ADMIN",
+        "userId": 1,
+        "username": "admin"
+      },
+      {
+        "email": "huynh@mail.com",
+        "fullName": "Huynh Hoàng",
+        "isActive": true,
+        "phoneNumber": null,
+        "role": "STUDENT",
+        "userId": 2,
+        "username": "huynh"
+      },
+      {
+        "email": "huynh1@mail.com",
+        "fullName": "Thầy Huynh",
+        "isActive": true,
+        "phoneNumber": null,
+        "role": "MENTOR",
+        "userId": 3,
+        "username": "thayhuynh"
+      },
+      {
+        "email": "test01@mail.com",
+        "fullName": "Lượng",
+        "isActive": true,
+        "phoneNumber": "0999888777",
+        "role": "STUDENT",
+        "userId": 5,
+        "username": "huynh2"
+      },
+      {
+        "email": "test02@mail.com",
+        "fullName": "Bằng",
+        "isActive": true,
+        "phoneNumber": "0123456789",
+        "role": "MENTOR",
+        "userId": 6,
+        "username": "bang"
+      }
+    ],
+    "errors": null,
+    "timestamp": "2026-03-29T20:58:40.8967745"
+  },
+  //api4
+  //request
+  //response
+  {
+    "success": true,
+    "message": "Thao tác thành công",
+    "data": {
+      "email": "test01@mail.com",
+      "fullName": "Lượng",
+      "isActive": true,
+      "phoneNumber": "0999888777",
+      "role": "STUDENT",
+      "userId": 5,
+      "username": "huynh2"
+    },
+    "errors": null,
+    "timestamp": "2026-03-29T20:59:26.2830835"
+  },
+  //api5
+  //request
+  {
+    "username": "test2",
+    "password": "040105",
+    "fullName": "Bằng",
+    "email": "test03@mail.com",
+    "phoneNumber": "0123456789",
+    "role": "MENTOR",
+    "isActive": true
+  },
+  //response
+  {
+    "success": true,
+    "message": "Thao tác thành công",
+    "data": {
+      "email": "test03@mail.com",
+      "fullName": "Bằng",
+      "isActive": true,
+      "phoneNumber": "0123456789",
+      "role": "MENTOR",
+      "userId": 8,
+      "username": "test2"
+    },
+    "errors": null,
+    "timestamp": "2026-03-29T21:02:56.3775897"
+  },
+  //api6
+  //request
+  {
+    "fullName": "Lượng",
+    "email": "test01@mail.com",
+    "phoneNumber": "0999888777"
+  },
+  //response
+  {
+    "success": true,
+    "message": "Thao tác thành công",
+    "data": {
+      "email": "test01@mail.com",
+      "fullName": "Lượng",
+      "isActive": true,
+      "phoneNumber": "0999888777",
+      "role": "STUDENT",
+      "userId": 5,
+      "username": "huynh2"
+    },
+    "errors": null,
+    "timestamp": "2026-03-29T21:03:53.2991404"
+  },
+  //api7
+  //request
+  {
+    "isActive": false
+  },
+  //response
+  {
+    "success": true,
+    "message": "Thao tác thành công",
+    "data": {
+      "email": "test01@mail.com",
+      "fullName": "Lượng",
+      "isActive": false,
+      "phoneNumber": "0999888777",
+      "role": "STUDENT",
+      "userId": 5,
+      "username": "huynh2"
+    },
+    "errors": null,
+    "timestamp": "2026-03-29T21:05:27.8109458"
+  },
+  //api8
+  //request
+  {
+    "role": "ADMIN"
+  },
+  //response
+  {
+    "success": true,
+    "message": "Thao tác thành công",
+    "data": {
+      "email": "test02@mail.com",
+      "fullName": "Bằng",
+      "isActive": true,
+      "phoneNumber": "0123456789",
+      "role": "ADMIN",
+      "userId": 6,
+      "username": "bang"
+    },
+    "errors": null,
+    "timestamp": "2026-03-29T21:07:52.2409797"
+  },
+  //api9
+  //request
+  //response
+  {
+    "success": true,
+    "message": "Thao tác thành công",
+    "data": null,
+    "errors": null,
+    "timestamp": "2026-03-30T21:07:22.8063596"
+  },
+  //api10
+  //request
+  //response
+  {
+    "success": true,
+    "message": "Thao tác thành công",
+    "data": [
+      {
+        "address": "Hà Nội",
+        "className": "D21CQCN01-B",
+        "dateOfBirth": "2003-05-15",
+        "email": "huynh@mail.com",
+        "fullName": "Huynh Hoàng",
+        "major": "Công nghệ thông tin",
+        "studentCode": "B21DCCN123",
+        "studentId": 2
+      },
+      {
+        "address": "Quận 1, TP. Hồ Chí Minh",
+        "className": "D21CQKH01-B",
+        "dateOfBirth": "2003-08-15",
+        "email": "test01@mail.com",
+        "fullName": "Lượng",
+        "major": "Khoa học máy tính",
+        "studentCode": "B21DCCN999",
+        "studentId": 5
+      }
+    ],
+    "errors": null,
+    "timestamp": "2026-03-30T22:11:27.5303146"
+  },
+  //api11
+  //request
+  //response
+  {
+    "success": true,
+    "message": "Thao tác thành công",
+    "data": {
+      "address": "Hà Nội",
+      "className": "D21CQCN01-B",
+      "dateOfBirth": "2003-05-15",
+      "email": "huynh@mail.com",
+      "fullName": "Huynh Hoàng",
+      "major": "Công nghệ thông tin",
+      "studentCode": "B21DCCN123",
+      "studentId": 2
+    },
+    "errors": null,
+    "timestamp": "2026-03-30T22:16:23.452853"
+  },
+  //api12
+  //request
+  {
+    "userId": 10,
+    "studentCode": "B23DCDT131",
+    "major": "Kỹ thuật phần mềm",
+    "className": "D21CQPM01-B",
+    "dateOfBirth": "2003-08-15",
+    "address": "Hà Đông, Hà Nội"
+  },
+  //response
+  {
+    "success": true,
+    "message": "Thao tác thành công",
+    "data": {
+      "address": "Hà Đông, Hà Nội",
+      "className": "D21CQPM01-B",
+      "dateOfBirth": "2003-08-15",
+      "email": "test03@mail.com",
+      "fullName": "Bằng",
+      "major": "Kỹ thuật phần mềm",
+      "studentCode": "B23DCDT131",
+      "studentId": 10
+    },
+    "errors": null,
+    "timestamp": "2026-03-30T22:34:43.3254154"
+  },
+  //api13
+  //request
+  {
+    "studentCode": "B23DCDT131",
+    "major": "Kỹ thuật massage",
+    "className": "D21CQKH01-B",
+    "dateOfBirth": "2003-08-15",
+    "address": "Quận 1, TP. Hồ Chí Minh"
+  },
+  //response
+  {
+    "success": true,
+    "message": "Thao tác thành công",
+    "data": {
+      "address": "Quận 1, TP. Hồ Chí Minh",
+      "className": "D21CQKH01-B",
+      "dateOfBirth": "2003-08-15",
+      "email": "test03@mail.com",
+      "fullName": "Bằng",
+      "major": "Kỹ thuật massage",
+      "studentCode": "B23DCDT131",
+      "studentId": 10
+    },
+    "errors": null,
+    "timestamp": "2026-03-30T22:37:00.3917894"
+  },
+  //api14
+  //request
+  //response
+  {
+    "success": true,
+    "message": "Thao tác thành công",
+    "data": [
+      {
+        "academicRank": "Thạc sĩ",
+        "department": "Khoa CNTT",
+        "email": "huynh1@mail.com",
+        "fullName": "Thầy Huynh",
+        "mentorId": 3,
+        "phoneNumber": null
+      }
+    ],
+    "errors": null,
+    "timestamp": "2026-03-30T22:49:33.9228075"
+  },
+  //api15
+  //request
+  //response
+  {
+    "success": true,
+    "message": "Thao tác thành công",
+    "data": {
+      "mentorId": 10,
+      "fullName": "Bằng",
+      "email": "test03@mail.com",
+      "phoneNumber": "0123456789",
+      "department": "Khối Giải pháp Công nghệ",
+      "academicRank": "ThR"
+    },
+    "errors": null,
+    "timestamp": "2026-03-30T23:46:35.9590349"
+  },
+  //api16
+  //request
+  {
+    "userId": 10,
+    "department": "Khối Giải pháp Công nghệ",
+    "academicRank": "ThR"
+  },
+  //response
+  {
+    "success": true,
+    "message": "Thao tác thành công",
+    "data": {
+      "mentorId": 10,
+      "fullName": "Bằng",
+      "email": "test03@mail.com",
+      "phoneNumber": "0123456789",
+      "department": "Khối Giải pháp Công nghệ",
+      "academicRank": "ThR"
+    },
+    "errors": null,
+    "timestamp": "2026-03-30T23:45:37.7559586"
+  },
+  //api17
+  //request
+  {
+    "department": "Khối Massage chỉnh hình",
+    "academicRank": "ThR"
+  },
+  //response
+  {
+    "success": true,
+    "message": "Thao tác thành công",
+    "data": {
+      "mentorId": 10,
+      "fullName": "Bằng",
+      "email": "test03@mail.com",
+      "phoneNumber": "0123456789",
+      "department": "Khối Massage chỉnh hình",
+      "academicRank": "ThR"
+    },
+    "errors": null,
+    "timestamp": "2026-03-30T23:47:25.4634681"
+  },
+  //api18
+  //request
+  //response
+  {
+    "success": true,
+    "message": "Thao tác thành công",
+    "data": [
+      {
+        "description": "Kỳ thực tập cơ sở cho sinh viên năm 3",
+        "endDate": "2026-08-30",
+        "phaseId": 1,
+        "phaseName": "Thực tập cơ sở 2026",
+        "startDate": "2026-06-01"
+      },
+      {
+        "description": "Kỳ thực tập tốt nghiệp cho sinh viên năm 4",
+        "endDate": "2026-12-31",
+        "phaseId": 2,
+        "phaseName": "Thực tập tốt nghiệp 2026",
+        "startDate": "2026-09-01"
+      }
+    ],
+    "errors": null,
+    "timestamp": "2026-03-30T23:58:06.782167"
+  },
+  //api19
+  //request
+  //response
+  {
+    "success": true,
+    "message": "Thao tác thành công",
+    "data": {
+      "description": "Kỳ thực tập tốt nghiệp cho sinh viên năm 4",
+      "endDate": "2026-12-31",
+      "phaseId": 2,
+      "phaseName": "Thực tập tốt nghiệp 2026",
+      "startDate": "2026-09-01"
+    },
+    "errors": null,
+    "timestamp": "2026-03-31T00:00:01.7150875"
+  },
+  //api20
+  //request
+  {
+    "phaseName": "Thực tập cơ sở Hè 2027",
+    "startDate": "2026-06-01",
+    "endDate": "2026-08-31",
+    "description": "Đợt thực tập khoa quản lý tài chính"
+  },
+  //response
+  {
+    "success": true,
+    "message": "Thao tác thành công",
+    "data": {
+      "description": "Đợt thực tập khoa quản lý tài chính",
+      "endDate": "2026-08-31",
+      "phaseId": 4,
+      "phaseName": "Thực tập cơ sở Hè 2027",
+      "startDate": "2026-06-01"
+    },
+    "errors": null,
+    "timestamp": "2026-03-31T00:35:55.0022019"
+  },
+  //api21
+  //request
+  {
+    "phaseName": "Thực tập cơ sở 2027 (Đã điều chỉnh)",
+    "startDate": "2026-06-15",
+    "endDate": "2026-09-15",
+    "description": "Đã gia hạn thêm 36 ngày cho sinh viên hoàn thiện báo cáo thực tập."
+  },
+  //response
+  {
+    "success": true,
+    "message": "Thao tác thành công",
+    "data": {
+      "description": "Đã gia hạn thêm 36 ngày cho sinh viên hoàn thiện báo cáo thực tập.",
+      "endDate": "2026-09-15",
+      "phaseId": 4,
+      "phaseName": "Thực tập cơ sở 2027 (Đã điều chỉnh)",
+      "startDate": "2026-06-15"
+    },
+    "errors": null,
+    "timestamp": "2026-03-31T00:37:49.1811675"
+  },
+  //api22
+  //request
+  //response
+  {
+    "success": true,
+    "message": "Thao tác thành công",
+    "data": null,
+    "errors": null,
+    "timestamp": "2026-03-31T03:18:08.239447"
+  },
+  //api23
+  //request
+  //response
+  {
+    "success": true,
+    "message": "Thao tác thành công",
+    "data": [
+      {
+        "criterionId": 1,
+        "criterionName": "Thái độ làm việc",
+        "description": "Đánh giá sự chuyên cần và thái độ",
+        "maxScore": 3.00
+      },
+      {
+        "criterionId": 3,
+        "criterionName": "Kỹ năng mềm",
+        "description": "Kỹ năng giao tiếp, làm việc nhóm",
+        "maxScore": 2.00
+      },
+      {
+        "criterionId": 2,
+        "criterionName": "Điểm chuyên môn và kết quả công việc",
+        "description": "Đánh giá chất lượng source code, khả năng giải quyết vấn đề và hoàn thành task đúng hạn.",
+        "maxScore": 50.00
+      }
+    ],
+    "errors": null,
+    "timestamp": "2026-03-31T03:20:47.4227936"
+  },
+  //api24
+  //request
+  //response
+  {
+    "success": true,
+    "message": "Thao tác thành công",
+    "data": {
+      "criterionId": 2,
+      "criterionName": "Điểm chuyên môn và kết quả công việc",
+      "description": "Đánh giá chất lượng source code, khả năng giải quyết vấn đề và hoàn thành task đúng hạn.",
+      "maxScore": 50.00
+    },
+    "errors": null,
+    "timestamp": "2026-03-31T03:24:30.2272169"
+  },
+  //api25
+  //request
+  {
+    "criterionName": "Điểm thái độ và ý thức kỷ luật",
+    "maxScore": 20.0,
+    "description": "Đánh giá sự chuyên cần, đúng giờ và thái độ hợp tác trong quá trình thực tập."
+  },
+  //response
+  {
+    "success": true,
+    "message": "Thao tác thành công",
+    "data": {
+      "criterionId": 5,
+      "criterionName": "Điểm thái độ và ý thức kỷ luật",
+      "description": "Đánh giá sự chuyên cần, đúng giờ và thái độ hợp tác trong quá trình thực tập.",
+      "maxScore": 20.0
+    },
+    "errors": null,
+    "timestamp": "2026-03-31T03:26:39.6771972"
+  },
+  //api26
+  //request
+  {
+    "criterionName": "Đánh giá chất lượng dịch vụ",
+    "maxScore": 50.0,
+    "description": "Đánh giá chất lượng source code, khả năng giải quyết vấn đề và hoàn thành task đúng hạn."
+  },
+  //response
+  {
+    "success": true,
+    "message": "Thao tác thành công",
+    "data": {
+      "criterionId": 5,
+      "criterionName": "Đánh giá chất lượng dịch vụ",
+      "description": "Đánh giá chất lượng source code, khả năng giải quyết vấn đề và hoàn thành task đúng hạn.",
+      "maxScore": 50.0
+    },
+    "errors": null,
+    "timestamp": "2026-03-31T03:28:47.8136249"
+  },
+  //api27
+  //request
+  //response
+  {
+    "success": true,
+    "message": "Thao tác thành công",
+    "data": null,
+    "errors": null,
+    "timestamp": "2026-03-31T03:30:01.8957363"
+  },
+  //api28
+  //request
+  //response
+  {
+    "success": true,
+    "message": "Thao tác thành công",
+    "data": [
+      {
+        "criteria": [
+          {
+            "criterionId": 3,
+            "criterionName": "Kỹ năng mềm",
+            "weight": 0.30
+          },
+          {
+            "criterionId": 2,
+            "criterionName": "Điểm chuyên môn và kết quả công việc",
+            "weight": 0.40
+          },
+          {
+            "criterionId": 5,
+            "criterionName": "Đánh giá chất lượng dịch vụ",
+            "weight": 0.30
+          }
+        ],
+        "endDate": "2026-03-10",
+        "phaseId": 5,
+        "phaseName": "Thực tập Xuân 2026",
+        "roundId": 11,
+        "roundName": "Đánh giá Giữa kỳ - Xuân 2026",
+        "startDate": "2026-03-01"
+      },
+      {
+        "criteria": [
+          {
+            "criterionId": 2,
+            "criterionName": "Điểm chuyên môn và kết quả công việc",
+            "weight": 0.40
+          },
+          {
+            "criterionId": 3,
+            "criterionName": "Kỹ năng mềm",
+            "weight": 0.20
+          },
+          {
+            "criterionId": 6,
+            "criterionName": "Kỹ năng lập trình",
+            "weight": 0.40
+          }
+        ],
+        "endDate": "2026-05-30",
+        "phaseId": 5,
+        "phaseName": "Thực tập Xuân 2026",
+        "roundId": 12,
+        "roundName": "Đánh giá Cuối kỳ - Xuân 2026",
+        "startDate": "2026-05-20"
+      },
+      {
+        "criteria": [],
+        "endDate": "2026-08-15",
+        "phaseId": 2,
+        "phaseName": "Thực tập tốt nghiệp 2026",
+        "roundId": 13,
+        "roundName": "Đánh giá Duy nhất - Hè 2026",
+        "startDate": "2026-08-10"
+      }
+    ],
+    "errors": null,
+    "timestamp": "2026-04-01T19:46:45.2906236"
+  },
+  //api29
+  //request
+  //response
+  {
+    "success": true,
+    "message": "Thao tác thành công",
+    "data": {
+      "criteria": [
+        {
+          "criterionId": 3,
+          "criterionName": "Kỹ năng mềm",
+          "weight": 0.30
+        },
+        {
+          "criterionId": 2,
+          "criterionName": "Điểm chuyên môn và kết quả công việc",
+          "weight": 0.40
+        },
+        {
+          "criterionId": 5,
+          "criterionName": "Đánh giá chất lượng dịch vụ",
+          "weight": 0.30
+        }
+      ],
+      "endDate": "2026-03-10",
+      "phaseId": 5,
+      "phaseName": "Thực tập Xuân 2026",
+      "roundId": 11,
+      "roundName": "Đánh giá Giữa kỳ - Xuân 2026",
+      "startDate": "2026-03-01"
+    },
+    "errors": null,
+    "timestamp": "2026-04-01T19:49:48.4286304"
+  },
+  //api30
+  //request
+  {
+    "phaseId": 7,
+    "roundName": "Đánh giá giữa kỳ - Hè 2026",
+    "startDate": "2026-07-10",
+    "endDate": "2026-07-20",
+    "criteria": [
+      {
+        "criterionId": 3,
+        "weight": 0.3
+      },
+      {
+        "criterionId": 2,
+        "weight": 0.7
+      }
+    ]
+  },
+  //response
+  {
+    "success": true,
+    "message": "Thao tác thành công",
+    "data": {
+      "criteria": [
+        {
+          "criterionId": 3,
+          "criterionName": "Kỹ năng mềm",
+          "weight": 0.3
+        },
+        {
+          "criterionId": 2,
+          "criterionName": "Điểm chuyên môn và kết quả công việc",
+          "weight": 0.7
+        }
+      ],
+      "endDate": "2026-07-20",
+      "phaseId": 7,
+      "phaseName": "Thực tập Thu 2026",
+      "roundId": 15,
+      "roundName": "Đánh giá giữa kỳ - Hè 2026",
+      "startDate": "2026-07-10"
+    },
+    "errors": null,
+    "timestamp": "2026-04-01T19:51:23.9692381"
+  },
+  //api31
+  //request
+  {
+    "phaseId": 7,
+    "roundName": "Đánh giá giữa kỳ bulon",
+    "startDate": "2026-07-10",
+    "endDate": "2026-07-20",
+    "criteria": [
+      {
+        "criterionId": 2,
+        "weight": 0.7
+      }
+    ]
+  },
+  //response
+  {
+    "success": true,
+    "message": "Thao tác thành công",
+    "data": {
+      "criteria": [
+        {
+          "criterionId": 2,
+          "criterionName": "Điểm chuyên môn và kết quả công việc",
+          "weight": 0.7
+        }
+      ],
+      "endDate": "2026-07-20",
+      "phaseId": 7,
+      "phaseName": "Thực tập Thu 2026",
+      "roundId": 15,
+      "roundName": "Đánh giá giữa kỳ bulon",
+      "startDate": "2026-07-10"
+    },
+    "errors": null,
+    "timestamp": "2026-04-01T19:52:54.1861984"
+  },
+  //api32
+  //request
+  //response
+  {
+    "success": true,
+    "message": "Thao tác thành công",
+    "data": null,
+    "errors": null,
+    "timestamp": "2026-04-01T19:54:51.9813601"
+  },
+  //api33
+  //request
+  //response
+  {
+    "success": true,
+    "message": "Thao tác thành công",
+    "data": [
+      {
+        "criterionId": 3,
+        "criterionName": "Kỹ năng mềm",
+        "roundCriteriaId": 25,
+        "roundId": 11,
+        "weight": 0.30
+      },
+      {
+        "criterionId": 2,
+        "criterionName": "Điểm chuyên môn và kết quả công việc",
+        "roundCriteriaId": 26,
+        "roundId": 11,
+        "weight": 0.40
+      },
+      {
+        "criterionId": 5,
+        "criterionName": "Đánh giá chất lượng dịch vụ",
+        "roundCriteriaId": 27,
+        "roundId": 11,
+        "weight": 0.30
+      },
+      {
+        "criterionId": 2,
+        "criterionName": "Điểm chuyên môn và kết quả công việc",
+        "roundCriteriaId": 37,
+        "roundId": 12,
+        "weight": 0.40
+      },
+      {
+        "criterionId": 3,
+        "criterionName": "Kỹ năng mềm",
+        "roundCriteriaId": 38,
+        "roundId": 12,
+        "weight": 0.20
+      },
+      {
+        "criterionId": 6,
+        "criterionName": "Kỹ năng lập trình",
+        "roundCriteriaId": 39,
+        "roundId": 12,
+        "weight": 0.40
+      }
+    ],
+    "errors": null,
+    "timestamp": "2026-03-31T15:09:52.2155439"
+  },
+  // loc theo round id http://localhost:8080/api/round_criteria?round_id=11
+  {
+    "success": true,
+    "message": "Thao tác thành công",
+    "data": [
+      {
+        "criterionId": 3,
+        "criterionName": "Kỹ năng mềm",
+        "roundCriteriaId": 25,
+        "roundId": 11,
+        "weight": 0.30
+      },
+      {
+        "criterionId": 2,
+        "criterionName": "Điểm chuyên môn và kết quả công việc",
+        "roundCriteriaId": 26,
+        "roundId": 11,
+        "weight": 0.40
+      },
+      {
+        "criterionId": 5,
+        "criterionName": "Đánh giá chất lượng dịch vụ",
+        "roundCriteriaId": 27,
+        "roundId": 11,
+        "weight": 0.30
+      }
+    ],
+    "errors": null,
+    "timestamp": "2026-03-31T15:14:59.1706976"
+  },
+  //api34
+  //request
+  //response
+  {
+    "success": true,
+    "message": "Thao tác thành công",
+    "data": {
+      "criterionId": 2,
+      "criterionName": "Điểm chuyên môn và kết quả công việc",
+      "roundCriteriaId": 37,
+      "roundId": 12,
+      "weight": 0.40
+    },
+    "errors": null,
+    "timestamp": "2026-03-31T15:16:12.4080015"
+  },
+  //api35
+  //request
+  {
+    "roundId": 13,
+    "criterionId": 10,
+    "weight": 0.25
+  },
+  //response
+  {
+    "success": true,
+    "message": "Thao tác thành công",
+    "data": {
+      "criterionId": 10,
+      "criterionName": "Tiến độ công việc",
+      "roundCriteriaId": 40,
+      "roundId": 13,
+      "weight": 0.25
+    },
+    "errors": null,
+    "timestamp": "2026-03-31T15:17:09.4371614"
+  },
+  //api36
+  //request
+  {
+    "weight": 0.4
+  },
+  //response
+  {
+    "success": true,
+    "message": "Thao tác thành công",
+    "data": {
+      "criterionId": 10,
+      "criterionName": "Tiến độ công việc",
+      "roundCriteriaId": 40,
+      "roundId": 13,
+      "weight": 0.4
+    },
+    "errors": null,
+    "timestamp": "2026-03-31T15:21:32.5591763"
+  },
+  //api37
+  //request
+  //response
+  {
+    "success": true,
+    "message": "Thao tác thành công",
+    "data": null,
+    "errors": null,
+    "timestamp": "2026-03-31T15:22:26.727595"
+  },
+  //api38
+  //request
+  //response
+  {
+    "success": true,
+    "message": "Thao tác thành công",
+    "data": [
+      {
+        "assignmentId": 23,
+        "mentorId": 3,
+        "mentorName": "Thầy Huynh",
+        "phaseId": 7,
+        "phaseName": "Thực tập Thu 2026",
+        "status": "IN_PROGRESS",
+        "studentCode": "B21DCCN123",
+        "studentId": 2,
+        "studentName": "Huynh Hoàng"
+      },
+      {
+        "assignmentId": 24,
+        "mentorId": 3,
+        "mentorName": "Thầy Huynh",
+        "phaseId": 6,
+        "phaseName": "Thực tập Hè 2026",
+        "status": "IN_PROGRESS",
+        "studentCode": "B21DCCN123",
+        "studentId": 2,
+        "studentName": "Huynh Hoàng"
+      },
+      {
+        "assignmentId": 25,
+        "mentorId": 3,
+        "mentorName": "Thầy Huynh",
+        "phaseId": 5,
+        "phaseName": "Thực tập Xuân 2026",
+        "status": "PENDING",
+        "studentCode": "B21DCCN999",
+        "studentId": 5,
+        "studentName": "Lượng"
+      },
+      {
+        "assignmentId": 26,
+        "mentorId": 6,
+        "mentorName": "Bằng",
+        "phaseId": 4,
+        "phaseName": "Thực tập cơ sở 2027 (Đã điều chỉnh)",
+        "status": "IN_PROGRESS",
+        "studentCode": "B21DCCN999",
+        "studentId": 5,
+        "studentName": "Lượng"
+      },
+      {
+        "assignmentId": 27,
+        "mentorId": 6,
+        "mentorName": "Bằng",
+        "phaseId": 2,
+        "phaseName": "Thực tập tốt nghiệp 2026",
+        "status": "COMPLETED",
+        "studentCode": "B21DCCN999",
+        "studentId": 5,
+        "studentName": "Lượng"
+      }
+    ],
+    "errors": null,
+    "timestamp": "2026-04-01T20:30:58.33125"
+  },
+  //api39
+  //request
+  //response
+  {
+    "success": true,
+    "message": "Thao tác thành công",
+    "data": {
+      "assignmentId": 23,
+      "mentorId": 3,
+      "mentorName": "Thầy Huynh",
+      "phaseId": 7,
+      "phaseName": "Thực tập Thu 2026",
+      "status": "IN_PROGRESS",
+      "studentCode": "B21DCCN123",
+      "studentId": 2,
+      "studentName": "Huynh Hoàng"
+    },
+    "errors": null,
+    "timestamp": "2026-04-01T20:32:41.2935808"
+  },
+  //api40
+  //request
+  {
+    "studentId": 5,
+    "mentorId": 6,
+    "phaseId": 6
+  },
+  //response
+  {
+    "success": true,
+    "message": "Thao tác thành công",
+    "data": {
+      "assignmentId": 28,
+      "mentorId": 6,
+      "mentorName": "Bằng",
+      "phaseId": 6,
+      "phaseName": "Thực tập Hè 2026",
+      "status": "PENDING",
+      "studentCode": "B21DCCN999",
+      "studentId": 5,
+      "studentName": "Lượng"
+    },
+    "errors": null,
+    "timestamp": "2026-04-01T20:34:02.370156"
+  },
+  //api41
+  //request
+  {
+    "status": "IN_PROGRESS"
+  },
+  //response
+  {
+    "success": true,
+    "message": "Thao tác thành công",
+    "data": {
+      "assignmentId": 28,
+      "mentorId": 6,
+      "mentorName": "Bằng",
+      "phaseId": 6,
+      "phaseName": "Thực tập Hè 2026",
+      "status": "IN_PROGRESS",
+      "studentCode": "B21DCCN999",
+      "studentId": 5,
+      "studentName": "Lượng"
+    },
+    "errors": null,
+    "timestamp": "2026-04-01T20:34:53.1002338"
+  },
+  //api42
+  //request
+  //response
+  {
+    "success": true,
+    "message": "Thao tác thành công",
+    "data": [
+      {
+        "assignmentId": 26,
+        "comments": "Thái độ cầu tiến, ham học hỏi.",
+        "criterionId": 7,
+        "criterionName": "Thái độ & Kỷ luật",
+        "evaluateBy": "Bằng",
+        "resultId": 43,
+        "roundId": 12,
+        "roundName": "Đánh giá Cuối kỳ - Xuân 2026",
+        "score": 7.50,
+        "studentName": "Lượng"
+      },
+      {
+        "assignmentId": 26,
+        "comments": "Mức độ hoàn thành trung bình, cần cố gắng thêm.",
+        "criterionId": 6,
+        "criterionName": "Kỹ năng lập trình",
+        "evaluateBy": "Bằng",
+        "resultId": 42,
+        "roundId": 12,
+        "roundName": "Đánh giá Cuối kỳ - Xuân 2026",
+        "score": 6.50,
+        "studentName": "Lượng"
+      },
+      {
+        "assignmentId": 27,
+        "comments": "okok",
+        "criterionId": 3,
+        "criterionName": "Kỹ năng mềm",
+        "evaluateBy": "Bằng",
+        "resultId": 45,
+        "roundId": 13,
+        "roundName": "Đánh giá Duy nhất - Hè 2026",
+        "score": 8.50,
+        "studentName": "Tù ngay"
+      },
+      {
+        "assignmentId": 27,
+        "comments": "Tuyệt vời, không có gì để chê!",
+        "criterionId": 10,
+        "criterionName": "Tiến độ công việc",
+        "evaluateBy": "Bằng",
+        "resultId": 44,
+        "roundId": 13,
+        "roundName": "Đánh giá Duy nhất - Hè 2026",
+        "score": 10.00,
+        "studentName": "Tù ngay"
+      }
+    ],
+    "errors": null,
+    "timestamp": "2026-04-02T05:54:35.2382977"
+  },
+  //api43
+  //request
+  {
+    "assignmentId": 27,
+    "roundId": 13,
+    "criterionId": 3,
+    "score": 8.5,
+    "comments": "okok"
+  },
+  //response
+  {
+    "success": true,
+    "message": "Thao tác thành công",
+    "data": {
+      "assignmentId": 27,
+      "comments": "okok",
+      "criterionId": 3,
+      "criterionName": "Kỹ năng mềm",
+      "evaluateBy": "Bằng",
+      "resultId": 45,
+      "roundId": 13,
+      "roundName": "Đánh giá Duy nhất - Hè 2026",
+      "score": 8.5,
+      "studentName": "Tù ngay"
+    },
+    "errors": null,
+    "timestamp": "2026-04-02T05:51:53.9211561"
+  },
+  //api44
+  //request
+  {
+    "score": 9.0,
+    "comments": "Đã review lại code, thấy sinh viên có cố gắng fix bug. Nâng lên nửa điểm."
+  },
+  //response
+  {
+    "success": true,
+    "message": "Thao tác thành công",
+    "data": {
+      "assignmentId": 27,
+      "comments": "Đã review lại code, thấy sinh viên có cố gắng fix bug. Nâng lên nửa điểm.",
+      "criterionId": 3,
+      "criterionName": "Kỹ năng mềm",
+      "evaluateBy": "Bằng",
+      "resultId": 45,
+      "roundId": 13,
+      "roundName": "Đánh giá Duy nhất - Hè 2026",
+      "score": 9.0,
+      "studentName": "Tù ngay"
+    },
+    "errors": null,
+    "timestamp": "2026-04-02T05:57:40.9658114"
+  },
+  //Invalid input
+  //Unauthorized
+  //thieu token
+  {
+    "success": false,
+    "message": "Bạn cần đăng nhập để thực hiện hành động này",
+    "data": null,
+    "errors": "Full authentication is required to access this resource",
+    "timestamp": "2026-04-02T05:56:17.5077568"
+  },
+  // sai role
+  {
+    "success": false,
+    "message": "Bạn không có quyền truy cập",
+    "data": null,
+    "errors": "Access Denied",
+    "timestamp": "2026-04-02T05:58:25.5453163"
+  }
+  //Conflict
+]

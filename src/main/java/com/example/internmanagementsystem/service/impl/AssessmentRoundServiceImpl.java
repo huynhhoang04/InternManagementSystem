@@ -62,7 +62,6 @@ public class AssessmentRoundServiceImpl implements AssessmentRoundService {
         InternshipPhase phase = phaseRepository.findById(request.getPhaseId())
                 .orElseThrow(() -> new RuntimeException("Không tìm thấy Giai đoạn thực tập (Phase)!"));
 
-        // 1. Lưu bảng Cha (AssessmentRound) trước
         AssessmentRound round = AssessmentRound.builder()
                 .phase(phase)
                 .roundName(request.getRoundName())

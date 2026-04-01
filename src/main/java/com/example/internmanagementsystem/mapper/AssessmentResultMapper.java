@@ -14,6 +14,8 @@ public class AssessmentResultMapper {
                 .assignmentId(result.getAssignment() != null ? result.getAssignment().getAssignmentId() : null)
                 .studentName(result.getAssignment() != null && result.getAssignment().getStudent() != null && result.getAssignment().getStudent().getUser() != null
                         ? result.getAssignment().getStudent().getUser().getFullName() : null)
+                .evaluateBy(result.getEvaluatedBy() != null && result.getEvaluatedBy().getUser() != null
+                        ? result.getEvaluatedBy().getUser().getFullName() : null)
                 .roundId(result.getRound() != null ? result.getRound().getRoundId() : null)
                 .roundName(result.getRound() != null ? result.getRound().getRoundName() : null)
                 .criterionId(result.getCriterion() != null ? result.getCriterion().getCriterionId() : null)

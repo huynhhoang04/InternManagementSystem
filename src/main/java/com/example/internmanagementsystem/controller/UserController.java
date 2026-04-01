@@ -4,6 +4,7 @@ import com.example.internmanagementsystem.dto.request.UserRequest;
 import com.example.internmanagementsystem.dto.request.UserRoleRequest;
 import com.example.internmanagementsystem.dto.request.UserStatusRequest;
 import com.example.internmanagementsystem.dto.request.UserUpdateRequest;
+import com.example.internmanagementsystem.dto.response.ApiResponse;
 import com.example.internmanagementsystem.dto.response.UserResponse;
 import com.example.internmanagementsystem.service.UserService;
 import jakarta.validation.Valid;
@@ -23,50 +24,50 @@ public class UserController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping
-    public ResponseEntity<List<UserResponse>> getAllUsers() {
-        return ResponseEntity.ok(userService.getAllUsers());
+    public ResponseEntity<ApiResponse<List<UserResponse>>> getAllUsers() {
+        return ResponseEntity.ok(ApiResponse.success(userService.getAllUsers()));
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping("/{id}")
-    public ResponseEntity<UserResponse> getUserById(@PathVariable("id") Integer id) {
-        return ResponseEntity.ok(userService.getUserById(id));
+    public ResponseEntity<ApiResponse<UserResponse>> getUserById(@PathVariable("id") Integer id) {
+        return ResponseEntity.ok(ApiResponse.success(userService.getUserById(id)));
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
-    public ResponseEntity<UserResponse> createUser(@Valid @RequestBody UserRequest request) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(userService.createUser(request));
+    public ResponseEntity<ApiResponse<UserResponse>> createUser(@Valid @RequestBody UserRequest request) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.success(userService.createUser(request)));
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}")
-    public ResponseEntity<UserResponse> updateUser(
+    public ResponseEntity<ApiResponse<UserResponse>> updateUser(
             @PathVariable("id") Integer id,
             @Valid @RequestBody UserUpdateRequest request) {
-        return ResponseEntity.ok(userService.updateUser(id, request));
+        return ResponseEntity.ok(ApiResponse.success(userService.updateUser(id, request)));
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}/status")
-    public ResponseEntity<UserResponse> updateUserStatus(
+    public ResponseEntity<ApiResponse<UserResponse>> updateUserStatus(
             @PathVariable("id") Integer id,
             @Valid @RequestBody UserStatusRequest request) {
-        return ResponseEntity.ok(userService.updateUserStatus(id, request));
+        return ResponseEntity.ok(ApiResponse.success(userService.updateUserStatus(id, request)));
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}/role")
-    public ResponseEntity<UserResponse> updateUserRole(
+    public ResponseEntity<ApiResponse<UserResponse>> updateUserRole(
             @PathVariable("id") Integer id,
             @Valid @RequestBody UserRoleRequest request) {
-        return ResponseEntity.ok(userService.updateUserRole(id, request));
+        return ResponseEntity.ok(ApiResponse.success(userService.updateUserRole(id, request)));
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable("id") Integer id) {
+    public ResponseEntity<ApiResponse<Void>> deleteUser(@PathVariable("id") Integer id) {
         userService.deleteUser(id);
-        return ResponseEntity.noContent().build();
+        return ResponseEntity.ok(ApiResponse.success(null));
     }
 }

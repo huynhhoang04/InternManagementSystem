@@ -2,6 +2,8 @@ package com.example.internmanagementsystem.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @Table(name = "mentors")
@@ -17,6 +19,7 @@ public class Mentor extends BaseEntity {
 
     @OneToOne
     @MapsId
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "mentor_id")
     private User user;
 

@@ -13,6 +13,7 @@ public class AssessmentResultResponse {
     private Integer resultId;
     private Integer assignmentId;
     private String studentName;
+    private String evaluateBy;
     private Integer roundId;
     private String roundName;
     private Integer criterionId;

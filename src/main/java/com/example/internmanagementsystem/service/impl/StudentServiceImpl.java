@@ -39,7 +39,7 @@ public class StudentServiceImpl implements StudentService {
         User currentUser = getCurrentUser();
 
         if (currentUser.getRole() == Role.ADMIN) {
-            return studentRepository.findAll().stream()
+            return studentRepository.findAllByUserRole(Role.STUDENT).stream()
                     .map(studentMapper::toResponse).collect(Collectors.toList());
         } else if (currentUser.getRole() == Role.MENTOR) {
             return studentRepository.findStudentsAssignedToMentor(currentUser.getUserId())
@@ -55,7 +55,7 @@ public class StudentServiceImpl implements StudentService {
             throw new RuntimeException("Lỗi bảo mật: Bạn chỉ được phép xem thông tin của chính mình!");
         }
 
-        Student student = studentRepository.findById(id)
+        Student student = studentRepository.findStudentByStudentIdAndUserRole(Role.STUDENT, id)
                 .orElseThrow(() -> new RuntimeException("Không tìm thấy thông tin sinh viên!"));
         return studentMapper.toResponse(student);
     }

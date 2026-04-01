@@ -3,6 +3,7 @@ package com.example.internmanagementsystem.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
 @Table(name = "internship_phases")
@@ -28,4 +29,10 @@ public class InternshipPhase extends BaseEntity {
 
     @Column(columnDefinition = "TEXT")
     private String description;
+
+    @OneToMany(mappedBy = "phase", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<AssessmentRound> assessmentRounds;
+
+    @OneToMany(mappedBy = "phase", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<InternshipAssignment> internshipAssignments;
 }

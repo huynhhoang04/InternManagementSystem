@@ -8,6 +8,8 @@ import com.example.internmanagementsystem.dto.response.UserResponse;
 import com.example.internmanagementsystem.entity.User;
 import com.example.internmanagementsystem.enums.Role;
 import com.example.internmanagementsystem.mapper.UserMapper;
+import com.example.internmanagementsystem.repository.MentorRepository;
+import com.example.internmanagementsystem.repository.StudentRepository;
 import com.example.internmanagementsystem.repository.UserRepository;
 import com.example.internmanagementsystem.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -25,6 +27,10 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
+    @Autowired
+    private StudentRepository studentRepository;
+    @Autowired
+    private MentorRepository mentorRepository;
 
     @Autowired
     private UserMapper userMapper;
@@ -103,8 +109,11 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void deleteUser(Integer id) {
-        if (!userRepository.existsById(id)) {
-            throw new RuntimeException("Không tìm thấy người dùng!");
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Không tìm thấy người dùng!"));
+
+        if (user.getRole() == Role.ADMIN) {
+            throw new RuntimeException("Không thể xóa tài khoản của ADMIN!");
         }
         userRepository.deleteById(id);
     }

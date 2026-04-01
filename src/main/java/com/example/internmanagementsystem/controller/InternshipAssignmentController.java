@@ -2,6 +2,7 @@ package com.example.internmanagementsystem.controller;
 
 import com.example.internmanagementsystem.dto.request.AssignmentRequest;
 import com.example.internmanagementsystem.dto.request.AssignmentStatusUpdateRequest;
+import com.example.internmanagementsystem.dto.response.ApiResponse;
 import com.example.internmanagementsystem.dto.response.AssignmentResponse;
 import com.example.internmanagementsystem.service.InternshipAssignmentService;
 import jakarta.validation.Valid;
@@ -23,27 +24,27 @@ public class InternshipAssignmentController {
 
     @PreAuthorize("hasAnyRole('ADMIN', 'MENTOR', 'STUDENT')")
     @GetMapping
-    public ResponseEntity<List<AssignmentResponse>> getAll() {
-        return ResponseEntity.ok(assignmentService.getAllAssignments());
+    public ResponseEntity<ApiResponse<List<AssignmentResponse>>> getAll() {
+        return ResponseEntity.ok(ApiResponse.success(assignmentService.getAllAssignments()));
     }
 
     @PreAuthorize("hasAnyRole('ADMIN', 'MENTOR', 'STUDENT')")
     @GetMapping("/{id}")
-    public ResponseEntity<AssignmentResponse> getById(@PathVariable("id") Integer id) {
-        return ResponseEntity.ok(assignmentService.getAssignmentById(id));
+    public ResponseEntity<ApiResponse<AssignmentResponse>> getById(@PathVariable("id") Integer id) {
+        return ResponseEntity.ok(ApiResponse.success(assignmentService.getAssignmentById(id)));
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @PostMapping
-    public ResponseEntity<AssignmentResponse> create(@Valid @RequestBody AssignmentRequest request) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(assignmentService.createAssignment(request));
+    public ResponseEntity<ApiResponse<AssignmentResponse>> create(@Valid @RequestBody AssignmentRequest request) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(ApiResponse.success(assignmentService.createAssignment(request)));
     }
 
     @PreAuthorize("hasRole('ADMIN')")
     @PutMapping("/{id}/status")
-    public ResponseEntity<AssignmentResponse> updateStatus(
+    public ResponseEntity<ApiResponse<AssignmentResponse>> updateStatus(
             @PathVariable("id") Integer id,
             @Valid @RequestBody AssignmentStatusUpdateRequest request) {
-        return ResponseEntity.ok(assignmentService.updateStatus(id, request));
+        return ResponseEntity.ok(ApiResponse.success(assignmentService.updateStatus(id, request)));
     }
 }

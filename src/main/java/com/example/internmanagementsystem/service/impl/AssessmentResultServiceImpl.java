@@ -41,29 +41,39 @@ public class AssessmentResultServiceImpl implements AssessmentResultService {
     }
 
     @Override
-    public List<AssessmentResultResponse> getResults(Integer assignmentId) {
+    public List<AssessmentResultResponse> getResults(Integer assignmentId, Integer userId) {
         User currentUser = getCurrentUser();
-        List<AssessmentResult> results;
+        User paramuser = null;
+        Integer studentId = null;
+        Integer mentorId = null;
 
-        if (currentUser.getRole() == Role.ADMIN) {
-            results = (assignmentId != null)
-                    ? resultRepository.findByAssignment_AssignmentId(assignmentId)
-                    : resultRepository.findAll();
+        if(userId != null) {paramuser = userRepository.findById(userId).orElseThrow(() -> new RuntimeException("Không tìm thấy id người dùng"));}
+
+
+        if (currentUser.getRole() == Role.STUDENT) {
+            studentId = currentUser.getUserId();
+            mentorId = userId;
         } else if (currentUser.getRole() == Role.MENTOR) {
-            results = resultRepository.findByAssignment_Mentor_MentorId(currentUser.getUserId());
-            if (assignmentId != null) {
-                results = results.stream().filter(r -> r.getAssignment().getAssignmentId().equals(assignmentId)).collect(Collectors.toList());
+            mentorId = currentUser.getUserId();
+            studentId = userId;
+        } else if (currentUser.getRole() == Role.ADMIN) {
+            if (paramuser.getRole() == (Role.STUDENT)) {
+                studentId = userId;
             }
-        } else if (currentUser.getRole() == Role.STUDENT) {
-            results = resultRepository.findByAssignment_Student_StudentId(currentUser.getUserId());
-            if (assignmentId != null) {
-                results = results.stream().filter(r -> r.getAssignment().getAssignmentId().equals(assignmentId)).collect(Collectors.toList());
+            if (paramuser.getRole() == (Role.MENTOR)) {
+                mentorId = userId;
             }
-        } else {
-            throw new RuntimeException("Quyền truy cập bị từ chối!");
+            else {throw new RuntimeException("Id phải là của mentor hoặc học viên");}
         }
 
-        return results.stream().map(mapper::toResponse).collect(Collectors.toList());
+        System.out.println("id: " + userId);
+        System.out.println(currentUser.getRole().toString());
+        System.out.println("dmmm " +studentId + " " + mentorId);
+        List<AssessmentResult> results = resultRepository.findFilteredResults(assignmentId, studentId, mentorId);
+
+        return results.stream()
+                .map(mapper::toResponse)
+                .collect(Collectors.toList());
     }
 
     @Override
