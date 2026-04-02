@@ -5,6 +5,7 @@ import com.example.internmanagementsystem.dto.response.ValidationError;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.FieldError;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.security.access.AccessDeniedException;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -103,9 +105,31 @@ public class GlobalExceptionHandler {
         ApiResponse<Object> apiResponse = ApiResponse.error(
                 HttpStatus.UNAUTHORIZED.value(),
                 "Sai mật khẩu",
-                ex.getMessage()
+                "Lỗi xác thực mật khẩu!"
         );
 
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(apiResponse);
+    }
+
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<ApiResponse<Object>> handleHttpMessageNotReadableException(HttpMessageNotReadableException ex) {
+        log.error("Sai định dạng trong body! {}",  ex.getMessage());
+        ApiResponse<Object> apiResponse = ApiResponse.error(
+                HttpStatus.UNPROCESSABLE_CONTENT.value(),
+                "Sai định dạng trong body!",
+                "Truyền sai định dạng trong body(có thể là Id)!"
+        );
+        return ResponseEntity.status(HttpStatus.UNPROCESSABLE_CONTENT).body(apiResponse);
+    }
+
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    public ResponseEntity<ApiResponse<Object>> handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException ex) {
+        log.error("Chuyền sai định dạng id trên url!");
+        ApiResponse<Object> apiResponse = ApiResponse.error(
+                HttpStatus.BAD_REQUEST.value(),
+                "Chuyền sai định dạng id trên url!",
+                "Id trên url không phải số"
+        );
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiResponse);
     }
 }

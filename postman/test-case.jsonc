@@ -1181,6 +1181,556 @@
     "timestamp": "2026-04-02T05:57:40.9658114"
   },
   //Invalid input
+  //api1
+  //empty username hoặc password hoặc cả 2
+  //request
+  {
+    "username": "",
+    "password": ""
+  },
+  //response
+  {
+    "success": false,
+    "message": "Dũ liệu đâu vào không hợp lệ",
+    "data": null,
+    "errors": [
+      {
+        "field": "username",
+        "message": "Tên đăng nhập không được để trống"
+      },
+      {
+        "field": "password",
+        "message": "Mật khẩu không được để trống"
+      }
+    ],
+    "timestamp": "2026-04-02T16:33:52.9788979"
+  },
+
+  //api6
+  //trống fullname và email, email sai định dạng
+  //request
+  {
+    "fullName": "",
+    "email": "",
+    "phoneNumber": "0999888777"
+  },
+  {
+    "fullName": "Ná ná na na",
+    "email": "naaaaa",
+    "phoneNumber": "0999888777"
+  },
+  //response
+  {
+    "success": false,
+    "message": "Dũ liệu đâu vào không hợp lệ",
+    "data": null,
+    "errors": [
+      {
+        "field": "fullName",
+        "message": "Họ tên không được để trống"
+      },
+      {
+        "field": "email",
+        "message": "Email không được để trống"
+      }
+    ],
+    "timestamp": "2026-04-02T16:36:16.312049"
+  },
+  {
+    "success": false,
+    "message": "Dũ liệu đâu vào không hợp lệ",
+    "data": null,
+    "errors": [
+      {
+        "field": "email",
+        "message": "Email không đúng định dạng"
+      }
+    ],
+    "timestamp": "2026-04-02T16:39:23.5274523"
+  },
+  //api5
+  //request
+  {
+    "username": "",
+    "password": "",
+    "fullName": "",
+    "email": "",
+    "phoneNumber": "0123456789",
+    "role": "",
+    "isActive": true
+  },
+  //response
+  {
+    "success": false,
+    "message": "Dũ liệu đâu vào không hợp lệ",
+    "data": null,
+    "errors": [
+      {
+        "field": "password",
+        "message": "Password phải có ít nhất 6 ký tự"
+      },
+      {
+        "field": "role",
+        "message": "Role không được để trống"
+      },
+      {
+        "field": "email",
+        "message": "Email không được để trống"
+      },
+      {
+        "field": "password",
+        "message": "Password không được để trống"
+      },
+      {
+        "field": "username",
+        "message": "Username không được để trống"
+      },
+      {
+        "field": "username",
+        "message": "Username phải từ 4 đến 50 ký tự"
+      },
+      {
+        "field": "fullName",
+        "message": "Họ tên không được để trống"
+      }
+    ],
+    "timestamp": "2026-04-02T16:44:15.1076404"
+  },
+
+  //api7
+  //request
+  {
+    "isActive": ""
+  },
+  //response
+  {
+    "success": false,
+    "message": "Dũ liệu đâu vào không hợp lệ",
+    "data": null,
+    "errors": [
+      {
+        "field": "isActive",
+        "message": "Trạng thái (isActive) không được để trống"
+      }
+    ],
+    "timestamp": "2026-04-02T16:45:23.9054037"
+  },
+  //api8
+  //request
+  {
+    "role": ""
+  },
+  //resonse
+  {
+    "success": false,
+    "message": "Dũ liệu đâu vào không hợp lệ",
+    "data": null,
+    "errors": [
+      {
+        "field": "role",
+        "message": "Role không được để trống"
+      }
+    ],
+    "timestamp": "2026-04-02T16:47:13.2313636"
+  },
+  //api12
+  //request
+  {
+    "userId": "",
+    "studentCode": "",
+    "major": "Kỹ thuật phần mềm",
+    "className": "D21CQPM01-B",
+    "dateOfBirth": "2003-08-15",
+    "address": "Hà Đông, Hà Nội"
+  },
+  //response
+  {
+    "success": false,
+    "message": "Dũ liệu đâu vào không hợp lệ",
+    "data": null,
+    "errors": [
+      {
+        "field": "studentCode",
+        "message": "Mã sinh viên không được để trống"
+      },
+      {
+        "field": "userId",
+        "message": "ID của User (Tài khoản) không được để trống"
+      }
+    ],
+    "timestamp": "2026-04-02T16:49:45.660838"
+  },
+  //api13
+  //request
+  {
+    "studentCode": "",
+    "major": "Kỹ thuật massage",
+    "className": "D21CQKH01-B",
+    "dateOfBirth": "2003-08-15",
+    "address": "Quận 1, TP. Hồ Chí Minh"
+  },
+  //response
+  {
+    "success": false,
+    "message": "Dũ liệu đâu vào không hợp lệ",
+    "data": null,
+    "errors": [
+      {
+        "field": "studentCode",
+        "message": "Mã sinh viên không được để trống"
+      }
+    ],
+    "timestamp": "2026-04-02T16:50:50.1110999"
+  },
+  //api16
+  //request
+  {
+    "userId": "",
+    "department": "Khối Giải pháp Công nghệ",
+    "academicRank": "ThR"
+  },
+  //response
+  {
+    "success": false,
+    "message": "Dũ liệu đâu vào không hợp lệ",
+    "data": null,
+    "errors": [
+      {
+        "field": "userId",
+        "message": "ID của User không được để trống"
+      }
+    ],
+    "timestamp": "2026-04-02T16:52:17.6752161"
+  },
+  //api17
+  //request
+  {
+    "department": "",
+    "academicRank": ""
+  },
+  //response
+  {
+    "success": false,
+    "message": "Dũ liệu đâu vào không hợp lệ",
+    "data": null,
+    "errors": [
+      {
+        "field": "academicRank",
+        "message": "Học hàm/Học vị không được để trống"
+      },
+      {
+        "field": "department",
+        "message": "Khoa/Bộ môn không được để trống"
+      }
+    ],
+    "timestamp": "2026-04-02T16:53:09.7224289"
+  },
+  //api20 và api21
+  //request
+  {
+    "phaseName": "",
+    "startDate": "",
+    "endDate": "",
+    "description": "Đợt thực tập khoa quản lý tài chính"
+  },
+  //response
+  {
+    "success": false,
+    "message": "Dũ liệu đâu vào không hợp lệ",
+    "data": null,
+    "errors": [
+      {
+        "field": "startDate",
+        "message": "Ngày bắt đầu không được để trống"
+      },
+      {
+        "field": "endDate",
+        "message": "Ngày kết thúc không được để trống"
+      },
+      {
+        "field": "phaseName",
+        "message": "Tên đợt thực tập không được để trống"
+      }
+    ],
+    "timestamp": "2026-04-02T16:54:36.1104301"
+  },
+  //api25 và api26
+  //request
+  {
+    "criterionName": "",
+    "maxScore": "",
+    "description": ""
+  },
+  {
+    "criterionName": "",
+    "maxScore": -1,
+    "description": ""
+  },
+  //response
+  {
+    "success": false,
+    "message": "Dũ liệu đâu vào không hợp lệ",
+    "data": null,
+    "errors": [
+      {
+        "field": "maxScore",
+        "message": "Điểm tối đa/Trọng số không được để trống"
+      },
+      {
+        "field": "criterionName",
+        "message": "Tên tiêu chí không được để trống"
+      }
+    ],
+    "timestamp": "2026-04-02T16:57:14.2251115"
+  },
+  {
+    "success": false,
+    "message": "Dũ liệu đâu vào không hợp lệ",
+    "data": null,
+    "errors": [
+      {
+        "field": "maxScore",
+        "message": "Điểm tối đa phải lớn hơn hoặc bằng 0"
+      },
+      {
+        "field": "criterionName",
+        "message": "Tên tiêu chí không được để trống"
+      }
+    ],
+    "timestamp": "2026-04-02T16:58:28.8963684"
+  },
+  //api30 và api31
+  //request
+  {
+    "phaseId": "",
+    "roundName": "",
+    "startDate": "",
+    "endDate": "",
+    "criteria": [
+      {
+        "criterionId": 3,
+        "weight": 0.3
+      },
+      {
+        "criterionId": 2,
+        "weight": 0.7
+      }
+    ]
+  },
+  //response
+  {
+    "success": false,
+    "message": "Dũ liệu đâu vào không hợp lệ",
+    "data": null,
+    "errors": [
+      {
+        "field": "endDate",
+        "message": "Ngày kết thúc không được để trống"
+      },
+      {
+        "field": "phaseId",
+        "message": "ID của Đợt thực tập (Phase) không được để trống"
+      },
+      {
+        "field": "roundName",
+        "message": "Tên đợt đánh giá không được để trống"
+      },
+      {
+        "field": "startDate",
+        "message": "Ngày bắt đầu không được để trống"
+      }
+    ],
+    "timestamp": "2026-04-02T17:19:08.7165717"
+  },
+  //api35
+  //request
+  {
+    "roundId": "",
+    "criterionId": "",
+    "weight": ""
+  },
+  //response
+  {
+    "success": false,
+    "message": "Dũ liệu đâu vào không hợp lệ",
+    "data": null,
+    "errors": [
+      {
+        "field": "roundId",
+        "message": "ID của Đợt đánh giá không được để trống"
+      },
+      {
+        "field": "criterionId",
+        "message": "ID của Tiêu chí không được để trống"
+      },
+      {
+        "field": "weight",
+        "message": "Trọng số không được để trống"
+      }
+    ],
+    "timestamp": "2026-04-02T17:37:18.6554429"
+  },
+  //api36
+  //request
+  {
+    "weight": ""
+  },
+  //response
+  {
+    "success": false,
+    "message": "Dũ liệu đâu vào không hợp lệ",
+    "data": null,
+    "errors": [
+      {
+        "field": "weight",
+        "message": "Trọng số không được để trống"
+      }
+    ],
+    "timestamp": "2026-04-02T17:37:43.9081545"
+  },
+  //api40
+  //request
+  {
+    "studentId": "",
+    "mentorId": "",
+    "phaseId": ""
+  },
+  //response
+  {
+    "success": false,
+    "message": "Dũ liệu đâu vào không hợp lệ",
+    "data": null,
+    "errors": [
+      {
+        "field": "mentorId",
+        "message": "ID Giảng viên hướng dẫn không được để trống"
+      },
+      {
+        "field": "phaseId",
+        "message": "ID Đợt thực tập không được để trống"
+      },
+      {
+        "field": "studentId",
+        "message": "ID Sinh viên không được để trống"
+      }
+    ],
+    "timestamp": "2026-04-02T17:39:06.8864278"
+  },
+  //api41
+  //request
+  {
+    "status": ""
+  },
+  //response
+  {
+    "success": false,
+    "message": "Dũ liệu đâu vào không hợp lệ",
+    "data": null,
+    "errors": [
+      {
+        "field": "status",
+        "message": "Trạng thái không được để trống"
+      }
+    ],
+    "timestamp": "2026-04-02T18:05:01.9610628"
+  },
+  //api43
+  //request
+  {
+    "assignmentId": "",
+    "roundId": "",
+    "criterionId": "",
+    "score": "",
+    "comments": "okok"
+  },
+  //response
+  {
+    "success": false,
+    "message": "Dũ liệu đâu vào không hợp lệ",
+    "data": null,
+    "errors": [
+      {
+        "field": "score",
+        "message": "Điểm số không được để trống"
+      },
+      {
+        "field": "criterionId",
+        "message": "ID Tiêu chí không được để trống"
+      },
+      {
+        "field": "roundId",
+        "message": "ID Đợt đánh giá không được để trống"
+      },
+      {
+        "field": "assignmentId",
+        "message": "ID Phân công không được để trống"
+      }
+    ],
+    "timestamp": "2026-04-02T18:06:35.5852557"
+  },
+  //api44
+  //request
+  {
+    "score": "",
+    "comments": "Đã review lại code, thấy sinh viên có cố gắng fix bug. Nâng lên nửa điểm."
+  },
+  {
+    "score": -1,
+    "comments": "Đã review lại code, thấy sinh viên có cố gắng fix bug. Nâng lên nửa điểm."
+  },
+  //response
+  {
+    "success": false,
+    "message": "Dũ liệu đâu vào không hợp lệ",
+    "data": null,
+    "errors": [
+      {
+        "field": "score",
+        "message": "Điểm số không được để trống"
+      }
+    ],
+    "timestamp": "2026-04-02T18:07:28.6006529"
+  },
+  {
+    "success": false,
+    "message": "Dũ liệu đâu vào không hợp lệ",
+    "data": null,
+    "errors": [
+      {
+        "field": "score",
+        "message": "Điểm số không được âm"
+      }
+    ],
+    "timestamp": "2026-04-02T18:07:45.5946717"
+  },
+  //id trong body khong phải so
+  //request
+  {
+    "userId": "a",
+    "studentCode": "",
+    "major": "Kỹ thuật phần mềm",
+    "className": "D21CQPM01-B",
+    "dateOfBirth": "2003-08-15",
+    "address": "Hà Đông, Hà Nội"
+  },
+  //response
+  {
+    "success": false,
+    "message": "Sai định dạng trong body!",
+    "data": null,
+    "errors": "Truyền sai định dạng trong body(có thể là Id)!",
+    "timestamp": "2026-04-02T18:15:03.1577121"
+  },
+  //id param khogn phải số
+  //request
+  //response
+  {
+    "success": false,
+    "message": "Chuyền sai định dạng id trên url!",
+    "data": null,
+    "errors": "Id trên url không phải số",
+    "timestamp": "2026-04-02T18:14:51.9773682"
+  },
   //Unauthorized
   //thieu token
   {
