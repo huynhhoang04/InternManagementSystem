@@ -1,5 +1,6 @@
 package com.example.internmanagementsystem.service.impl;
 
+import com.example.internmanagementsystem.config.UserContextHelper;
 import com.example.internmanagementsystem.dto.request.AssignmentRequest;
 import com.example.internmanagementsystem.dto.request.AssignmentStatusUpdateRequest;
 import com.example.internmanagementsystem.dto.response.AssignmentResponse;
@@ -18,7 +19,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
 public class InternshipAssignmentServiceImpl implements InternshipAssignmentService {
     @Autowired
     private InternshipAssignmentRepository assignmentRepository;
@@ -32,18 +32,19 @@ public class InternshipAssignmentServiceImpl implements InternshipAssignmentServ
     private UserRepository userRepository;
     @Autowired
     private AssignmentMapper mapper;
+    @Autowired
+    private UserContextHelper userContextHelper;
 
-    private User getCurrentUser() {
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        return userRepository.findByUsername(username)
-                .orElseThrow(() -> new RuntimeException("Lỗi xác thực!"));
-    }
 
     @Override
-    public List<AssignmentResponse> getAllAssignments() {
-        User currentUser = getCurrentUser();
+    public List<AssignmentResponse> getAllAssignments(Integer userId) {
+        User currentUser = userContextHelper.getCurrentUser();
 
         if (currentUser.getRole() == Role.ADMIN) {
+            if (userId != null) {
+                    return assignmentRepository.findByStudent_StudentIdOrMentor_MentorId(userId, userId).stream()
+                            .map(mapper::toResponse).collect(Collectors.toList());
+            }
             return assignmentRepository.findAll().stream().map(mapper::toResponse).collect(Collectors.toList());
         } else if (currentUser.getRole() == Role.MENTOR) {
             return assignmentRepository.findByMentor_MentorId(currentUser.getUserId()).stream()
@@ -60,7 +61,7 @@ public class InternshipAssignmentServiceImpl implements InternshipAssignmentServ
         InternshipAssignment assignment = assignmentRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Không tìm thấy bản ghi phân công này!"));
 
-        User currentUser = getCurrentUser();
+        User currentUser = userContextHelper.getCurrentUser();
         if (currentUser.getRole() == Role.MENTOR && !assignment.getMentor().getMentorId().equals(currentUser.getUserId())) {
             throw new RuntimeException("Bạn không có quyền xem phân công của giảng viên khác!");
         }

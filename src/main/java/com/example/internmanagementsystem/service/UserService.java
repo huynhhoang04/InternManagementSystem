@@ -9,7 +9,8 @@ import com.example.internmanagementsystem.dto.response.UserResponse;
 import java.util.List;
 
 public interface UserService {
-    List<UserResponse> getAllUsers();
+    List<UserResponse> getAllUsers(String role);
+
     UserResponse getUserById(Integer id);
     UserResponse createUser(UserRequest request);
 

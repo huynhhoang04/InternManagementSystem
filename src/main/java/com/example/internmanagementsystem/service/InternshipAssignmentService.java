@@ -7,7 +7,7 @@ import com.example.internmanagementsystem.dto.response.AssignmentResponse;
 import java.util.List;
 
 public interface InternshipAssignmentService {
-    List<AssignmentResponse> getAllAssignments();
+    List<AssignmentResponse> getAllAssignments(Integer userId);
 
     AssignmentResponse getAssignmentById(Integer id);
 

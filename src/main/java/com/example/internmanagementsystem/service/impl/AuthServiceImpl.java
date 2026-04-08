@@ -23,7 +23,6 @@ import org.springframework.stereotype.Service;
 import javax.management.RuntimeMBeanException;
 
 @Service
-@RequiredArgsConstructor
 public class AuthServiceImpl implements AuthService {
     @Autowired
     private AuthenticationManager authenticationManager;

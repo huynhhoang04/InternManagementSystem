@@ -12,7 +12,6 @@ import com.example.internmanagementsystem.repository.MentorRepository;
 import com.example.internmanagementsystem.repository.StudentRepository;
 import com.example.internmanagementsystem.repository.UserRepository;
 import com.example.internmanagementsystem.service.UserService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -21,7 +20,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository userRepository;
@@ -36,10 +34,18 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public List<UserResponse> getAllUsers() {
-        return userRepository.findAll().stream()
-                .map(userMapper::toUserResponse)
-                .collect(Collectors.toList());
+    public List<UserResponse> getAllUsers(String strrole) {
+        System.out.println(strrole);
+        List<User> ulist = userRepository.findAll();
+        if ((strrole != null && !strrole.isBlank()) ){
+            try {
+                Role role = Role.valueOf(strrole);
+                ulist = ulist.stream().filter(u -> u.getRole().equals(role)).collect(Collectors.toList());
+            }catch (Exception e){
+                throw new EnumConstantNotPresentException(Role.class, strrole);
+            }
+        }
+        return ulist.stream().map(userMapper::toUserResponse).collect(Collectors.toList());
     }
 
     @Override
@@ -53,6 +59,10 @@ public class UserServiceImpl implements UserService {
     public UserResponse createUser(UserRequest request) {
         if (userRepository.existsByUsername(request.getUsername())) {
             throw new RuntimeException("Username đã tồn tại!");
+        }
+
+        if (userRepository.existsByEmail(request.getEmail())){
+            throw new RuntimeException("Email đã tồn tại!");
         }
 
         User user = User.builder()

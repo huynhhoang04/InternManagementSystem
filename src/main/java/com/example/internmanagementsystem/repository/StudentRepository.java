@@ -16,5 +16,8 @@ public interface StudentRepository extends JpaRepository<Student, Integer> {
 
     List<Student> findAllByUserRole(Role role);
 
-    Optional<Student> findStudentByStudentIdAndUserRole(Role role, Integer id);
+    Optional<Student> findStudentByStudentIdAndUserRole( Integer id, Role role);
+
+    @Query("SELECT s FROM Student s JOIN InternshipAssignment ia ON s.studentId = ia.student.studentId WHERE s.studentId = :studentId AND ia.mentor.mentorId = :mentorId")
+    Optional<Student> findStudentsAssignedToMentorByStudentId(@Param("mentorId")Integer mentorid, @Param("studentId") Integer studentid);
 }

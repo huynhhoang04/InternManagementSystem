@@ -11,4 +11,6 @@ public interface InternshipAssignmentRepository extends JpaRepository<Internship
     List<InternshipAssignment> findByStudent_StudentId(Integer studentId);
 
     boolean existsByStudent_StudentIdAndPhase_PhaseId(Integer studentId, Integer phaseId);
+
+    List<InternshipAssignment> findByStudent_StudentIdOrMentor_MentorId(Integer studentId, Integer mentorId);
 }

@@ -1,5 +1,6 @@
 package com.example.internmanagementsystem.service.impl;
 
+import com.example.internmanagementsystem.config.UserContextHelper;
 import com.example.internmanagementsystem.dto.request.AssessmentResultRequest;
 import com.example.internmanagementsystem.dto.request.AssessmentResultUpdateRequest;
 import com.example.internmanagementsystem.dto.response.AssessmentResultResponse;
@@ -8,16 +9,13 @@ import com.example.internmanagementsystem.enums.Role;
 import com.example.internmanagementsystem.mapper.AssessmentResultMapper;
 import com.example.internmanagementsystem.repository.*;
 import com.example.internmanagementsystem.service.AssessmentResultService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
 public class AssessmentResultServiceImpl implements AssessmentResultService {
     @Autowired
     private AssessmentResultRepository resultRepository;
@@ -33,16 +31,12 @@ public class AssessmentResultServiceImpl implements AssessmentResultService {
     private UserRepository userRepository;
     @Autowired
     private AssessmentResultMapper mapper;
-
-    private User getCurrentUser() {
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        return userRepository.findByUsername(username)
-                .orElseThrow(() -> new RuntimeException("Lỗi xác thực!"));
-    }
+    @Autowired
+    private UserContextHelper userContextHelper;
 
     @Override
     public List<AssessmentResultResponse> getResults(Integer assignmentId, Integer userId) {
-        User currentUser = getCurrentUser();
+        User currentUser = userContextHelper.getCurrentUser();
         User paramuser = null;
         Integer studentId = null;
         Integer mentorId = null;
@@ -60,15 +54,12 @@ public class AssessmentResultServiceImpl implements AssessmentResultService {
             if (paramuser.getRole() == (Role.STUDENT)) {
                 studentId = userId;
             }
-            if (paramuser.getRole() == (Role.MENTOR)) {
+            else if (paramuser.getRole() == (Role.MENTOR)) {
                 mentorId = userId;
             }
             else {throw new RuntimeException("Id phải là của mentor hoặc học viên");}
         }
 
-        System.out.println("id: " + userId);
-        System.out.println(currentUser.getRole().toString());
-        System.out.println("dmmm " +studentId + " " + mentorId);
         List<AssessmentResult> results = resultRepository.findFilteredResults(assignmentId, studentId, mentorId);
 
         return results.stream()
@@ -78,7 +69,7 @@ public class AssessmentResultServiceImpl implements AssessmentResultService {
 
     @Override
     public AssessmentResultResponse createResult(AssessmentResultRequest request) {
-        User currentUser = getCurrentUser();
+        User currentUser = userContextHelper.getCurrentUser();
 
         Mentor currentMentor = mentorRepository.findById(currentUser.getUserId())
                 .orElseThrow(() -> new RuntimeException("Lỗi: Không tìm thấy hồ sơ Giảng viên của bạn!"));
@@ -115,7 +106,7 @@ public class AssessmentResultServiceImpl implements AssessmentResultService {
 
     @Override
     public AssessmentResultResponse updateResult(Integer id, AssessmentResultUpdateRequest request) {
-        User currentUser = getCurrentUser();
+        User currentUser = userContextHelper.getCurrentUser();
 
         AssessmentResult result = resultRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Không tìm thấy kết quả đánh giá!"));

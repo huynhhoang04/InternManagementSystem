@@ -1721,7 +1721,7 @@
     "errors": "Truyền sai định dạng trong body(có thể là Id)!",
     "timestamp": "2026-04-02T18:15:03.1577121"
   },
-  //id param khogn phải số
+  //id trên url khogn phải số
   //request
   //response
   {
@@ -1747,6 +1747,197 @@
     "data": null,
     "errors": "Access Denied",
     "timestamp": "2026-04-02T05:58:25.5453163"
-  }
+  },
   //Conflict
+  //api3
+  //lỗi truyền sai role
+  {
+    "success": false,
+    "message": "Chuyền sai định dạng tham số",
+    "data": null,
+    "errors": "com.example.internmanagementsystem.enums.Role.....",
+    "timestamp": "2026-04-08T06:20:00.4435051"
+  },
+  //api 5
+  // trùng tên email
+  {
+    "success": false,
+    "message": "Lỗi thực thi",
+    "data": null,
+    "errors": "Username đã tồn tại!",
+    "timestamp": "2026-04-08T06:23:11.5692961"
+  },
+  {
+    "success": false,
+    "message": "Lỗi thực thi",
+    "data": null,
+    "errors": "Email đã tồn tại!",
+    "timestamp": "2026-04-08T06:26:10.2627547"
+  },
+  //api 8
+  // đổi quền admin
+  {
+    "success": false,
+    "message": "Lỗi thực thi",
+    "data": null,
+    "errors": "Lỗi bảo mật: Không được phép thay đổi quyền của ADMIN!",
+    "timestamp": "2026-04-08T06:27:48.5450264"
+  },
+  //api9 xoa admin
+  {
+    "success": false,
+    "message": "Lỗi thực thi",
+    "data": null,
+    "errors": "Không thể xóa tài khoản của ADMIN!",
+    "timestamp": "2026-04-08T06:29:27.3819394"
+  },
+  //api 11 xem hsinh khac
+  {
+    "success": false,
+    "message": "Lỗi thực thi",
+    "data": null,
+    "errors": "Lỗi bảo mật: Bạn chỉ được phép xem thông tin của chính mình!",
+    "timestamp": "2026-04-08T06:41:32.7648092"
+  },
+  //mentor cũng the
+  {
+    "success": false,
+    "message": "Lỗi thực thi",
+    "data": null,
+    "errors": "Lỗi bảo mật: Sinh viên này không thuộc quyền quản lý của bạn!",
+    "timestamp": "2026-04-08T07:12:52.689816"
+  },
+  //api 12
+  {
+    "success": false,
+    "message": "Lỗi thực thi",
+    "data": null,
+    "errors": "Lỗi: Tài khoản này đã có hồ sơ Sinh viên rồi!",
+    "timestamp": "2026-04-08T07:49:34.656101"
+  },
+  {
+    "success": false,
+    "message": "Lỗi thực thi",
+    "data": null,
+    "errors": "Lỗi: Tài khoản này không có Role là STUDENT!",
+    "timestamp": "2026-04-08T07:49:55.1363197"
+  },
+  // api 13 cập nhật t tin của người kahcs nếu là student
+  {
+    "success": false,
+    "message": "Lỗi thực thi",
+    "data": null,
+    "errors": "Lỗi bảo mật: Bạn chỉ được phép cập nhật thông tin của chính mình!",
+    "timestamp": "2026-04-08T07:50:49.9436825"
+  },
+  //api 15 xem của ng kahcs
+  {
+    "success": false,
+    "message": "Lỗi thực thi",
+    "data": null,
+    "errors": "Lỗi bảo mật: Bạn chỉ được phép xem thông tin của chính mình!",
+    "timestamp": "2026-04-08T07:52:23.1565914"
+  },
+  // api 16
+  {
+    "success": false,
+    "message": "Lỗi thực thi",
+    "data": null,
+    "errors": "Lỗi: Tài khoản này đã có hồ sơ Mentor rồi!",
+    "timestamp": "2026-04-08T07:53:29.125865"
+  },
+  {
+    "success": false,
+    "message": "Lỗi thực thi",
+    "data": null,
+    "errors": "Lỗi: Tài khoản này không có Role là MENTOR!",
+    "timestamp": "2026-04-08T07:53:41.8060754"
+  },
+  // cạp nhật ko phải mình api 17
+  {
+    "success": false,
+    "message": "Lỗi thực thi",
+    "data": null,
+    "errors": "Lỗi bảo mật: Bạn chỉ được phép cập nhật thông tin của chính mình!",
+    "timestamp": "2026-04-08T07:55:14.7294851"
+  },
+  //id round ko tonm tại api 30
+  {
+    "success": false,
+    "message": "Lỗi thực thi",
+    "data": null,
+    "errors": "Không tìm thấy Tiêu chí có ID: 100",
+    "timestamp": "2026-04-08T08:39:17.1763459"
+  },
+  // api 31 ko thấy phare
+  {
+    "success": false,
+    "message": "Lỗi thực thi",
+    "data": null,
+    "errors": "Không tìm thấy Giai đoạn thực tập (Phase)!",
+    "timestamp": "2026-04-08T08:40:37.6824126"
+  },
+  //api 35
+  {
+    "success": false,
+    "message": "Lỗi thực thi",
+    "data": null,
+    "errors": "Tiêu chí này đã tồn tại trong đợt đánh giá!",
+    "timestamp": "2026-04-08T09:09:35.4393521"
+  },
+  //api39
+  {
+    "success": false,
+    "message": "Lỗi thực thi",
+    "data": null,
+    "errors": "Bạn không có quyền xem phân công của giảng viên khác!",
+    "timestamp": "2026-04-08T09:47:48.5287984"
+  },
+  {
+    "success": false,
+    "message": "Lỗi thực thi",
+    "data": null,
+    "errors": "Bạn không có quyền xem phân công của sinh viên khác!",
+    "timestamp": "2026-04-08T09:49:03.0560196"
+  },
+  //api40
+  {
+    "success": false,
+    "message": "Lỗi thực thi",
+    "data": null,
+    "errors": "Sinh viên này đã được phân công trong đợt thực tập này rồi!",
+    "timestamp": "2026-04-08T09:53:10.1999618"
+  },
+  //api 41
+  {
+    "success": false,
+    "message": "Lỗi thực thi",
+    "data": null,
+    "errors": "Id phải là của mentor hoặc học viên",
+    "timestamp": "2026-04-08T10:05:30.707909"
+  },
+  //api43
+  {
+    "success": false,
+    "message": "Lỗi thực thi",
+    "data": null,
+    "errors": "Tiêu chí này đã được chấm điểm trong đợt này rồi! Vui lòng sử dụng chức năng Cập nhật.",
+    "timestamp": "2026-04-08T10:33:11.9927188"
+  },
+  {
+    "success": false,
+    "message": "Lỗi thực thi",
+    "data": null,
+    "errors": "Lỗi: Bạn chỉ được phép chấm điểm cho sinh viên mà bạn được phân công hướng dẫn!",
+    "timestamp": "2026-04-08T10:34:47.3966688"
+  },
+  //api 44
+  {
+    "success": false,
+    "message": "Lỗi thực thi",
+    "data": null,
+    "errors": "Lỗi: Bạn chỉ được phép cập nhật điểm cho sinh viên của chính mình!",
+    "timestamp": "2026-04-08T10:38:39.6516604"
+  }
+
 ]

@@ -132,4 +132,15 @@ public class GlobalExceptionHandler {
         );
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiResponse);
     }
+
+    @ExceptionHandler(EnumConstantNotPresentException.class)
+    public ResponseEntity<ApiResponse<Object>> handleEnumConstantNotPresentException(EnumConstantNotPresentException ex) {
+        log.error("Chuyền sai định dạng tham số");
+        ApiResponse<Object> apiResponse = ApiResponse.error(
+                HttpStatus.BAD_REQUEST.value(),
+                "Chuyền sai định dạng tham số",
+                ex.getMessage()
+        );
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(apiResponse);
+    }
 }

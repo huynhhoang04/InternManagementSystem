@@ -1,5 +1,6 @@
 package com.example.internmanagementsystem.service.impl;
 
+import com.example.internmanagementsystem.config.UserContextHelper;
 import com.example.internmanagementsystem.dto.request.StudentRequest;
 import com.example.internmanagementsystem.dto.request.StudentUpdateRequest;
 import com.example.internmanagementsystem.dto.response.StudentResponse;
@@ -19,24 +20,19 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
 public class StudentServiceImpl implements StudentService {
     @Autowired
-    private final StudentRepository studentRepository;
+    private StudentRepository studentRepository;
     @Autowired
-    private final UserRepository userRepository;
+    private UserRepository userRepository;
     @Autowired
-    private final StudentMapper studentMapper;
-
-    private User getCurrentUser(){
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        return userRepository.findByUsername(username)
-                .orElseThrow(() -> new RuntimeException("Lỗi xác thực: Không tìm thấy tài khoản!"));
-    }
+    private StudentMapper studentMapper;
+    @Autowired
+    private UserContextHelper userContextHelper;
 
     @Override
     public List<StudentResponse> getAllStudents() {
-        User currentUser = getCurrentUser();
+        User currentUser = userContextHelper.getCurrentUser();
 
         if (currentUser.getRole() == Role.ADMIN) {
             return studentRepository.findAllByUserRole(Role.STUDENT).stream()
@@ -50,14 +46,19 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public StudentResponse getStudentById(Integer id) {
-        User currentUser = getCurrentUser();
+        User currentUser = userContextHelper.getCurrentUser();
         if (currentUser.getRole() == Role.STUDENT && !currentUser.getUserId().equals(id)) {
             throw new RuntimeException("Lỗi bảo mật: Bạn chỉ được phép xem thông tin của chính mình!");
         }
-
-        Student student = studentRepository.findStudentByStudentIdAndUserRole(Role.STUDENT, id)
+        if(currentUser.getRole() == Role.MENTOR){
+            Student student = studentRepository.findStudentsAssignedToMentorByStudentId(currentUser.getUserId(), id).orElseThrow(() -> new RuntimeException("Lỗi bảo mật: Sinh viên này không thuộc quyền quản lý của bạn!"));
+            return studentMapper.toResponse(student);
+        }
+        else {
+            Student student = studentRepository.findStudentByStudentIdAndUserRole(id, Role.STUDENT)
                 .orElseThrow(() -> new RuntimeException("Không tìm thấy thông tin sinh viên!"));
-        return studentMapper.toResponse(student);
+            return studentMapper.toResponse(student);
+        }
     }
 
     @Override
@@ -86,7 +87,7 @@ public class StudentServiceImpl implements StudentService {
 
     @Override
     public StudentResponse updateStudent(Integer id, StudentUpdateRequest request) {
-        User currentUser = getCurrentUser();
+        User currentUser = userContextHelper.getCurrentUser();
 
         if (currentUser.getRole() == Role.STUDENT && !currentUser.getUserId().equals(id)) {
             throw new RuntimeException("Lỗi bảo mật: Bạn chỉ được phép cập nhật thông tin của chính mình!");

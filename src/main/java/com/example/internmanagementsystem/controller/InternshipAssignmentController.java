@@ -24,8 +24,10 @@ public class InternshipAssignmentController {
 
     @PreAuthorize("hasAnyRole('ADMIN', 'MENTOR', 'STUDENT')")
     @GetMapping
-    public ResponseEntity<ApiResponse<List<AssignmentResponse>>> getAll() {
-        return ResponseEntity.ok(ApiResponse.success(assignmentService.getAllAssignments()));
+    public ResponseEntity<ApiResponse<List<AssignmentResponse>>> getAll(
+            @RequestParam(name = "user_id", required = false) Integer userId
+    ) {
+        return ResponseEntity.ok(ApiResponse.success(assignmentService.getAllAssignments(userId)));
     }
 
     @PreAuthorize("hasAnyRole('ADMIN', 'MENTOR', 'STUDENT')")

@@ -24,8 +24,8 @@ public class UserController {
 
     @PreAuthorize("hasRole('ADMIN')")
     @GetMapping
-    public ResponseEntity<ApiResponse<List<UserResponse>>> getAllUsers() {
-        return ResponseEntity.ok(ApiResponse.success(userService.getAllUsers()));
+    public ResponseEntity<ApiResponse<List<UserResponse>>> getAllUsers(@RequestParam(name = "role", required = false) String role) {
+        return ResponseEntity.ok(ApiResponse.success(userService.getAllUsers(role)));
     }
 
     @PreAuthorize("hasRole('ADMIN')")

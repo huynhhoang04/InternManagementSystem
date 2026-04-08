@@ -1,5 +1,6 @@
 package com.example.internmanagementsystem.service.impl;
 
+import com.example.internmanagementsystem.config.UserContextHelper;
 import com.example.internmanagementsystem.dto.request.MentorRequest;
 import com.example.internmanagementsystem.dto.request.MentorUpdateRequest;
 import com.example.internmanagementsystem.dto.response.MentorResponse;
@@ -19,7 +20,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-@RequiredArgsConstructor
 public class MentorServiceImpl implements MentorService {
     @Autowired
     private MentorRepository mentorRepository;
@@ -27,16 +27,12 @@ public class MentorServiceImpl implements MentorService {
     private UserRepository userRepository;
     @Autowired
     private MentorMapper mentorMapper;
-
-    private User getCurrentUser() {
-        String username = SecurityContextHolder.getContext().getAuthentication().getName();
-        return userRepository.findByUsername(username)
-                .orElseThrow(() -> new RuntimeException("Lỗi xác thực: Không tìm thấy tài khoản!"));
-    }
+    @Autowired
+    private UserContextHelper userContextHelper;
 
     @Override
     public List<MentorResponse> getAllMentors() {
-        User user = getCurrentUser();
+        User user = userContextHelper.getCurrentUser();
         if (user.getRole().equals(Role.ADMIN)) {
             return mentorRepository.findAllByUserRole(Role.MENTOR).stream()
                     .map(mentorMapper::toResponse)
@@ -56,7 +52,7 @@ public class MentorServiceImpl implements MentorService {
 
     @Override
     public MentorResponse getMentorById(Integer id) {
-        User currentUser = getCurrentUser();
+        User currentUser = userContextHelper.getCurrentUser();
         if (currentUser.getRole() == Role.MENTOR && !currentUser.getUserId().equals(id)) {
             throw new RuntimeException("Lỗi bảo mật: Bạn chỉ được phép xem thông tin của chính mình!");
         }
@@ -89,10 +85,10 @@ public class MentorServiceImpl implements MentorService {
 
     @Override
     public MentorResponse updateMentor(Integer id, MentorUpdateRequest request) {
-        User currentUser = getCurrentUser();
+        User currentUser = userContextHelper.getCurrentUser();
 
         if (currentUser.getRole() == Role.MENTOR && !currentUser.getUserId().equals(id)) {
-            throw new RuntimeException("Lỗi bảo mật: Bạn chỉ được phép xem thông tin của chính mình!");
+            throw new RuntimeException("Lỗi bảo mật: Bạn chỉ được phép cập nhật thông tin của chính mình!");
         }
 
         Mentor mentor = mentorRepository.findById(id)
